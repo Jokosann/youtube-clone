@@ -9,7 +9,10 @@ const Button = ({ children, className, ...props }: ButtonProps) => {
   return (
     <button
       {...props}
-      className={cn('px-3 py-[6px] bg-[#eee] text-black font-medium rounded-lg text-sm', className)}
+      className={cn(
+        'px-3 py-[6px] bg-[#efefef]/70 text-black font-medium rounded-lg text-sm',
+        className
+      )}
     >
       {children}
     </button>
