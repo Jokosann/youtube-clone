@@ -13,8 +13,12 @@ import Profile from '/images/user_profile.jpg';
 import Upload from '/images/upload.png';
 import Notif from '/images/notification.png';
 import VoiceSearch from '/images/voice-search.png';
+import { useStore } from '../../../libs/zustand';
 
 const Navbar = () => {
+  const { sidebarAbsoluteActive, setTrueSidebarAbsoluteActive, setFalseSidebarAbsoluteActive } =
+    useStore();
+
   const [navFilter, setNavFilter] = useState('all');
   const [searchActive, setSeachactive] = useState(false);
   const inputSearchRef = useRef<HTMLInputElement | null>(null);
@@ -24,10 +28,15 @@ const Navbar = () => {
   }, [searchActive]);
 
   return (
-    <header className="fixed w-full top-0 left-0 right-0 p-2 md:px-4 flex flex-col">
+    <header className="fixed w-full top-0 left-0 right-0 p-2 md:px-4 flex flex-col bg-white">
       <nav className="flex items-center justify-between w-full gap-4 mb-3">
         <div className="flex items-center gap-5">
-          <div className="w-10 aspect-square rounded-full overflow-hidden grid place-content-center cursor-pointer hover:bg-gray-100">
+          <div
+            onClick={
+              sidebarAbsoluteActive ? setFalseSidebarAbsoluteActive : setTrueSidebarAbsoluteActive
+            }
+            className="w-10 aspect-square rounded-full overflow-hidden grid place-content-center cursor-pointer hover:bg-gray-100"
+          >
             <RxHamburgerMenu className="text-2xl" />
           </div>
 
@@ -100,14 +109,18 @@ const Navbar = () => {
         </div>
       </nav>
 
-      <div className="w-full flex items-center justify-between gap-4">
-        <div className="w-full overflow-x-auto p-2 mask pl-4">
+      <div className="w-full flex items-center justify-between gap-4 scroll-container">
+        <div
+          className={cn('w-full md:w-custom-navbar-fillter md:ml-16 overflow-x-auto p-2 mask pl-4', {
+            'xl:ml-[240px]': sidebarAbsoluteActive,
+          })}
+        >
           <div className="flex items-center gap-3">
             {navbarFilter.map((item: string, index: number) => (
               <Button
                 key={index}
                 onClick={() => setNavFilter(item)}
-                className={cn('w-fit capitalize whitespace-nowrap', {
+                className={cn('w-fit capitalize whitespace-nowrap snap-end', {
                   'bg-black text-white': navFilter === item,
                 })}
               >

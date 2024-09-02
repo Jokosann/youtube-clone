@@ -2,7 +2,14 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        'custom-sidebar-fixed': 'calc(100vh - 64px)',
+      },
+      width: {
+        'custom-navbar-fillter': 'calc(100% - 80px)',
+      },
+    },
     screens: {
       xs: '420px',
       sm: '640px',

@@ -12,3 +12,27 @@ body {
 .mask {
   mask: linear-gradient(90deg, white, white 80%, white 80%, transparent);
 }
+
+.scroll-container {
+  scroll-snap-type: x mandatory;
+  scrollbar-color: transparent transparent;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.back-container.active {
+  content: '';
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 50%;
+  z-index: 20;
+}
+
+.back-container.active.hide {
+  display: none;
+}
