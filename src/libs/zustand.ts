@@ -1,13 +1,13 @@
 import { create } from 'zustand';
 
 type Store = {
-  sidebarAbsoluteActive: boolean;
-  setTrueSidebarAbsoluteActive: () => void;
-  setFalseSidebarAbsoluteActive: () => void;
+  sidebarActive: boolean;
+  setSidebarActive: () => void;
+  // setFalsesidebarActive: () => void;
 };
 
 export const useStore = create<Store>((set) => ({
-  sidebarAbsoluteActive: false,
-  setTrueSidebarAbsoluteActive: () => set({ sidebarAbsoluteActive: true }),
-  setFalseSidebarAbsoluteActive: () => set({ sidebarAbsoluteActive: false }),
+  sidebarActive: false,
+  setSidebarActive: () => set((state) => ({ sidebarActive: !state.sidebarActive })),
+  // setFalsesidebarActive: () => set({ sidebarActive: false }),
 }));

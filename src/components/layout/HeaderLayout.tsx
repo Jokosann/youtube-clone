@@ -5,14 +5,14 @@ import SidebarUp from '../ui/sidebar/SidebarUp';
 import SidebarDown from '../ui/sidebar/SidebarDown';
 
 const HeaderLayout = ({ children }: { children: React.ReactNode }) => {
-  const { sidebarAbsoluteActive, setFalseSidebarAbsoluteActive } = useStore();
+  const { sidebarActive, setSidebarActive } = useStore();
 
   return (
     <>
       <div
-        onClick={setFalseSidebarAbsoluteActive}
+        onClick={setSidebarActive}
         className={cn('back-container xl:hidden', {
-          active: sidebarAbsoluteActive,
+          active: sidebarActive,
         })}
       />
       <Navbar />
@@ -20,7 +20,7 @@ const HeaderLayout = ({ children }: { children: React.ReactNode }) => {
       <SidebarUp />
       <div
         className={cn('mt-32 ml-20', {
-          'ml-[240px]': sidebarAbsoluteActive,
+          'xl:ml-[240px]': sidebarActive,
         })}
       >
         {children}

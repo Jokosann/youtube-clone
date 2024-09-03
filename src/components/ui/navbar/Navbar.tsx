@@ -2,22 +2,21 @@ import { useEffect, useRef, useState } from 'react';
 import Button from '../Button';
 import { navbarFilter } from '../../../data/filter-navbar';
 import { cn } from '../../../utils/cn';
-
-import { RxHamburgerMenu } from 'react-icons/rx';
-import { CiSearch } from 'react-icons/ci';
-import { IoIosArrowForward } from 'react-icons/io';
-import { FaArrowLeft } from 'react-icons/fa6';
-
-import LogoYt from '/images/yt-logo.png';
-import Profile from '/images/user_profile.jpg';
-import Upload from '/images/upload.png';
-import Notif from '/images/notification.png';
-import VoiceSearch from '/images/voice-search.png';
 import { useStore } from '../../../libs/zustand';
 
+import { CiSearch } from 'react-icons/ci';
+import { FaArrowLeft } from 'react-icons/fa6';
+
+import Jack from '/images/jack.png';
+import VoiceSearch from '/images/voice-search.png';
+import HambergerMenu from '../svg/HambergerMenu';
+import YoutubeLogo from '../svg/YoutubeLogo';
+import Upload from '../svg/Upload';
+import Notifications from '../svg/Notifications';
+import Arrows from '../svg/Arrows';
+
 const Navbar = () => {
-  const { sidebarAbsoluteActive, setTrueSidebarAbsoluteActive, setFalseSidebarAbsoluteActive } =
-    useStore();
+  const { sidebarActive, setSidebarActive } = useStore();
 
   const [navFilter, setNavFilter] = useState('all');
   const [searchActive, setSeachactive] = useState(false);
@@ -30,25 +29,23 @@ const Navbar = () => {
   return (
     <header className="fixed w-full top-0 left-0 right-0 p-2 md:px-4 flex flex-col bg-white">
       <nav className="flex items-center justify-between w-full gap-4 mb-3">
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-4">
           <div
-            onClick={
-              sidebarAbsoluteActive ? setFalseSidebarAbsoluteActive : setTrueSidebarAbsoluteActive
-            }
+            onClick={setSidebarActive}
             className="w-10 aspect-square rounded-full overflow-hidden grid place-content-center cursor-pointer hover:bg-gray-100"
           >
-            <RxHamburgerMenu className="text-2xl" />
+            <HambergerMenu className="w-10 aspect-square" />
           </div>
 
-          <div className="w-[5.5rem]">
-            <img src={LogoYt} alt="Logo Youtube" />
+          <div className="logo">
+            <YoutubeLogo className="w-[90px] h-5" />
           </div>
         </div>
 
         {/* search */}
         <div
-          className={cn('max-w-3xl w-full hidden md:flex gap-4 px-8', {
-            'absolute top-0 left-0 right-0 flex gap-4 bg-white p-2': searchActive,
+          className={cn('max-w-3xl w-full hidden md:flex gap-4 md:px-8 xl:px-16 md:relative', {
+            'absolute md:relative top-0 left-0 right-0 flex gap-4 bg-white p-2 md:p-0': searchActive,
           })}
         >
           <div
@@ -95,27 +92,27 @@ const Navbar = () => {
 
           <div className="flex items-center sm:gap-1 md:gap-2">
             <div className="w-10 aspect-square rounded-full overflow-hidden grid place-content-center cursor-pointer hover:bg-gray-100">
-              <img src={Upload} alt="Upload Youtube" className="w-6" />
+              <Upload className="w-10 aspect-square" />
             </div>
 
             <div className="hidden w-10 aspect-square rounded-full overflow-hidden xs:grid place-content-center cursor-pointer hover:bg-gray-100">
-              <img src={Notif} alt="Notif Youtube" className="w-6" />
+              <Notifications active={false} className="w-10 aspect-square" />
             </div>
 
             <button className="w-[60px] grid place-content-center">
-              <img src={Profile} alt="Profile" className="w-8 aspect-square rounded-full" />
+              <img src={Jack} alt="Profile" className="w-8 aspect-square rounded-full" />
             </button>
           </div>
         </div>
       </nav>
 
-      <div className="w-full flex items-center justify-between gap-4 scroll-container">
+      <div className="w-full flex items-center -mt-3">
         <div
-          className={cn('w-full md:w-custom-navbar-fillter md:ml-16 overflow-x-auto p-2 mask pl-4', {
-            'xl:ml-[240px]': sidebarAbsoluteActive,
+          className={cn('w-full md:pl-20 scroll-container overflow-x-auto mask mt-5', {
+            'xl:pl-[240px]': sidebarActive,
           })}
         >
-          <div className="flex items-center gap-3">
+          <div className="flex gap-3">
             {navbarFilter.map((item: string, index: number) => (
               <Button
                 key={index}
@@ -129,8 +126,8 @@ const Navbar = () => {
             ))}
           </div>
         </div>
-        <div className="w-12 aspect-square rounded-full overflow-hidden grid place-content-center cursor-pointer hover:bg-gray-100">
-          <IoIosArrowForward className="text-xl ml-1" />
+        <div className="w-10 aspect-square rounded-full overflow-hidden grid place-content-center cursor-pointer hover:bg-gray-100">
+          <Arrows className="scale-125" />
         </div>
       </div>
     </header>
