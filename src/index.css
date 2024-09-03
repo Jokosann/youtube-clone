@@ -13,14 +13,28 @@ body {
   mask: linear-gradient(90deg, white, white 80%, white 80%, transparent);
 }
 
-.scroll-container {
-  scroll-snap-type: x mandatory;
+.scroll-fillter-container {
   scrollbar-color: transparent transparent;
 }
 
-.scroll-container::-webkit-scrollbar {
-  display: none;
-  width: 5px;
+.scroll-side-container {
+  scroll-snap-type: x mandatory;
+  visibility: hidden;
+}
+
+.scroll-side-container::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  visibility: hidden;
+}
+
+.scroll-side-container::-webkit-scrollbar-thumb {
+  background: #aaa;
+}
+
+.scroll-side-inner,
+.scroll-side-container:hover {
+  visibility: visible;
 }
 
 .back-container.active {

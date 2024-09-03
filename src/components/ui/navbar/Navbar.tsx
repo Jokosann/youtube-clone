@@ -7,7 +7,7 @@ import { useStore } from '../../../libs/zustand';
 import { CiSearch } from 'react-icons/ci';
 import { FaArrowLeft } from 'react-icons/fa6';
 
-import Jack from '/images/jack.png';
+import UserProfile from '/images/user1.png';
 import VoiceSearch from '/images/voice-search.png';
 import HambergerMenu from '../svg/HambergerMenu';
 import YoutubeLogo from '../svg/YoutubeLogo';
@@ -100,15 +100,25 @@ const Navbar = () => {
             </div>
 
             <button className="w-[60px] grid place-content-center">
-              <img src={Jack} alt="Profile" className="w-8 aspect-square rounded-full" />
+              <img src={UserProfile} alt="Profile" className="w-8 aspect-square rounded-full" />
             </button>
           </div>
         </div>
       </nav>
 
-      <div className="w-full flex items-center -mt-3">
+      <div
+        className={cn('relative flex items-center -mt-3 px-2 overflow-hidden ml-20', {
+          'ml-0': sidebarActive,
+        })}
+      >
+        {/* <div className="absolute top-0 left-0 flex justify-center items-center w-16 h-full bg-white z-30">
+          <div className="w-10 aspect-square rounded-full overflow-hidden flex justify-center items-center cursor-pointer hover:bg-gray-100">
+            <Arrows className="scale-125" />
+          </div>
+        </div> */}
+
         <div
-          className={cn('w-full md:pl-20 scroll-container overflow-x-auto mask mt-5', {
+          className={cn('w-full scroll-fillter-container overflow-x-auto mask mt-5', {
             'xl:pl-[240px]': sidebarActive,
           })}
         >
@@ -126,8 +136,11 @@ const Navbar = () => {
             ))}
           </div>
         </div>
-        <div className="w-10 aspect-square rounded-full overflow-hidden grid place-content-center cursor-pointer hover:bg-gray-100">
-          <Arrows className="scale-125" />
+
+        <div className="absolute top-0 right-0 flex justify-end items-center w-16 h-full bg-white z-30">
+          <div className="w-10 aspect-square rounded-full overflow-hidden flex justify-center items-center cursor-pointer hover:bg-gray-100">
+            <Arrows className="scale-125" />
+          </div>
         </div>
       </div>
     </header>

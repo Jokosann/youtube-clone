@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       height: {
-        'custom-sidebar-fixed': 'calc(100vh - 64px)',
+        'custom-sidebar-down': 'calc(100vh - 64px)',
+        'custom-sidebar-up': 'calc(100vh - 60.8rem)',
       },
       width: {
         'custom-navbar-fillter': 'calc(100% - 80px)',

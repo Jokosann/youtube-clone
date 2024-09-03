@@ -13,7 +13,7 @@ const SvgLight = (props: SvgButtonProps) => {
       style={{ pointerEvents: 'none', display: 'inherit' }}
       {...props}
     >
-      <path d="m11 7 6 3.5-6 3.5V7zm7 13H4V6H3v15h15v-1zm3-2H6V3h15v15zM7 17h13V4H7v13z"></path>
+      <path d="M11 11v6H7v-6h4m1-1H6v8h6v-8zM3 3.03V21h14l4-4V3.03M20 4v11.99l-.01.01H16v3.99l-.01.01H4V4h16zm-2 4H6V6h12v2zm0 7h-5v-2h5v2zm0-3h-5v-2h5v2z"></path>
     </svg>
   );
 };
@@ -31,13 +31,13 @@ const SvgDark = (props: SvgButtonProps) => {
       style={{ pointerEvents: 'none', display: 'inherit' }}
       {...props}
     >
-      <path d="M4 20h14v1H3V6h1v14zM21 3v15H6V3h15zm-4 7.5L11 7v7l6-3.5z"></path>
+      <path d="M3 3.03V21h14l4-4V3.03H3zM6 6h12v2H6V6zm7 9v-2h5v2h-5zm0-3v-2h5v2h-5zm-1 6H6v-8h6v8zm4-2h3.99L16 19.99V16z"></path>
     </svg>
   );
 };
 
-const You: React.FC<SvgButtonProps> = ({ active, ...props }) => {
+const News: React.FC<SvgButtonProps> = ({ active, ...props }) => {
   return !active ? <SvgLight {...props} /> : <SvgDark {...props} />;
 };
 
-export default You;
+export default News;

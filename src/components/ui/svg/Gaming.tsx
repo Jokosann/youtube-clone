@@ -13,7 +13,7 @@ const SvgLight = (props: SvgButtonProps) => {
       style={{ pointerEvents: 'none', display: 'inherit' }}
       {...props}
     >
-      <path d="m11 7 6 3.5-6 3.5V7zm7 13H4V6H3v15h15v-1zm3-2H6V3h15v15zM7 17h13V4H7v13z"></path>
+      <path d="M10 12H8v2H6v-2H4v-2h2V8h2v2h2v2zm7 .5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5.67 1.5 1.5 1.5 1.5-.67 1.5-1.5zm3-3c0-.83-.67-1.5-1.5-1.5S17 8.67 17 9.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5zm-3.03-4.35-4.5 2.53-.49.27-.49-.27-4.5-2.53L3 7.39v6.43l8.98 5.04 8.98-5.04V7.39l-3.99-2.24m0-1.15 4.99 2.8v7.6L11.98 20 2 14.4V6.8L6.99 4l4.99 2.8L16.97 4z"></path>
     </svg>
   );
 };
@@ -31,13 +31,13 @@ const SvgDark = (props: SvgButtonProps) => {
       style={{ pointerEvents: 'none', display: 'inherit' }}
       {...props}
     >
-      <path d="M4 20h14v1H3V6h1v14zM21 3v15H6V3h15zm-4 7.5L11 7v7l6-3.5z"></path>
+      <path d="m16.97 4-4.99 2.8L6.99 4 2 6.8v7.6l9.98 5.6 9.98-5.6V6.8L16.97 4zM10 12H8v2H6v-2H4v-2h2V8h2v2h2v2zm5.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-3c-.83 0-1.5-.67-1.5-1.5S17.67 8 18.5 8s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"></path>
     </svg>
   );
 };
 
-const You: React.FC<SvgButtonProps> = ({ active, ...props }) => {
+const Gaming: React.FC<SvgButtonProps> = ({ active, ...props }) => {
   return !active ? <SvgLight {...props} /> : <SvgDark {...props} />;
 };
 
-export default You;
+export default Gaming;

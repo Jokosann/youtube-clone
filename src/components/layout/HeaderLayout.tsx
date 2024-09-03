@@ -19,7 +19,7 @@ const HeaderLayout = ({ children }: { children: React.ReactNode }) => {
       <SidebarDown />
       <SidebarUp />
       <div
-        className={cn('mt-32 ml-20', {
+        className={cn('mt-32 ml-20 px-6', {
           'xl:ml-[240px]': sidebarActive,
         })}
       >

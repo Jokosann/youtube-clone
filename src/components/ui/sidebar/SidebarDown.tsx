@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { listSidebarFixed } from '../../../data/list-sidebar-fixed';
+import { listSidebarDown } from '../../../data/list-sidebar-down';
 import { cn } from '../../../utils/cn';
 
 import Home from '../svg/Home';
@@ -12,11 +12,11 @@ const SidebarDown = () => {
 
   return (
     <aside
-      className="hidden fixed top-16 left-0 w-[70px] h-custom-sidebar-fixed md:flex flex-col gap-2 px-1"
+      className="hidden fixed top-16 left-0 w-[70px] h-custom-sidebar-Down md:flex flex-col gap-2 px-1 bg-white"
       role="complementary"
       aria-label="Sidebar"
     >
-      {listSidebarFixed.map((item: string, index: number) => (
+      {listSidebarDown.map((item: string, index: number) => (
         <div
           key={index}
           onClick={() => setSideActive(item)}

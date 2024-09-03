@@ -4,7 +4,6 @@ const SvgLight = (props: SvgButtonProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      enableBackground="new 0 0 24 24"
       height="24"
       viewBox="0 0 24 24"
       width="24"
@@ -13,7 +12,7 @@ const SvgLight = (props: SvgButtonProps) => {
       style={{ pointerEvents: 'none', display: 'inherit' }}
       {...props}
     >
-      <path d="m11 7 6 3.5-6 3.5V7zm7 13H4V6H3v15h15v-1zm3-2H6V3h15v15zM7 17h13V4H7v13z"></path>
+      <path d="m22.01 4.91-.5-2.96L1.64 5.19 2 8v13h20V8H3.06l18.95-3.09zM5 9l1 3h3L8 9h2l1 3h3l-1-3h2l1 3h3l-1-3h3v11H3V9h2z"></path>
     </svg>
   );
 };
@@ -22,7 +21,6 @@ const SvgDark = (props: SvgButtonProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      enableBackground="new 0 0 24 24"
       height="24"
       viewBox="0 0 24 24"
       width="24"
@@ -31,13 +29,13 @@ const SvgDark = (props: SvgButtonProps) => {
       style={{ pointerEvents: 'none', display: 'inherit' }}
       {...props}
     >
-      <path d="M4 20h14v1H3V6h1v14zM21 3v15H6V3h15zm-4 7.5L11 7v7l6-3.5z"></path>
+      <path d="m22.01 4.91-.5-2.96L1.64 5.19 2 8v13h20V8H3.06l18.95-3.09zM18 9l1 3h-3l-1-3h3zm-5 0 1 3h-3l-1-3h3zM8 9l1 3H6L5 9h3z"></path>
     </svg>
   );
 };
 
-const You: React.FC<SvgButtonProps> = ({ active, ...props }) => {
+const Films: React.FC<SvgButtonProps> = ({ active, ...props }) => {
   return !active ? <SvgLight {...props} /> : <SvgDark {...props} />;
 };
 
-export default You;
+export default Films;
