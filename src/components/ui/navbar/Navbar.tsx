@@ -16,11 +16,11 @@ import Notifications from '../svg/Notifications';
 import Arrows from '../svg/Arrows';
 
 const Navbar = () => {
-  const { sidebarActive, setSidebarActive } = useStore();
+  const { sidebarActive, setSidebarActive, setWebcam } = useStore();
 
+  const inputSearchRef = useRef<HTMLInputElement | null>(null);
   const [navFilter, setNavFilter] = useState('all');
   const [searchActive, setSeachactive] = useState(false);
-  const inputSearchRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (inputSearchRef.current && searchActive) inputSearchRef.current.focus();
@@ -91,7 +91,10 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center sm:gap-1 md:gap-2">
-            <div className="w-10 aspect-square rounded-full overflow-hidden grid place-content-center cursor-pointer hover:bg-gray-100">
+            <div
+              onClick={() => setWebcam()}
+              className="w-10 aspect-square rounded-full overflow-hidden grid place-content-center cursor-pointer hover:bg-gray-100"
+            >
               <Upload className="w-10 aspect-square" />
             </div>
 
@@ -107,8 +110,8 @@ const Navbar = () => {
       </nav>
 
       <div
-        className={cn('relative flex items-center -mt-3 px-2 overflow-hidden ml-20', {
-          'ml-0': sidebarActive,
+        className={cn('relative flex items-center -mt-3 px-2 overflow-hidden md:ml-20', {
+          'xl:ml-[240px]': sidebarActive,
         })}
       >
         {/* <div className="absolute top-0 left-0 flex justify-center items-center w-16 h-full bg-white z-30">
@@ -117,11 +120,7 @@ const Navbar = () => {
           </div>
         </div> */}
 
-        <div
-          className={cn('w-full scroll-fillter-container overflow-x-auto mask mt-5', {
-            'xl:pl-[240px]': sidebarActive,
-          })}
-        >
+        <div className={cn('w-full scroll-fillter-container overflow-x-auto mask mt-5', {})}>
           <div className="flex gap-3">
             {navbarFilter.map((item: string, index: number) => (
               <Button

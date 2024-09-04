@@ -25,6 +25,10 @@ import YoutubePremium from '../svg/YtPremium';
 import YoutubeStudio from '../svg/YtStudio';
 import YoutubeMusic from '../svg/YtMusic';
 import YoutubeKids from '../svg/YtKids';
+import Settings from '../svg/Settings';
+import Report from '../svg/Report';
+import Help from '../svg/Help';
+import Feedback from '../svg/Feedback';
 
 const SidebarUp = () => {
   const [sidebarUpActive, setSidebarUpActive] = useState('home');
@@ -228,12 +232,44 @@ const SidebarUp = () => {
               </div>
             ))}
           </div>
-          <div>
+
+          {/* SETTINGS */}
+          <div className="pb-3 border-b border-b-gray-500/30 pt-4">
             {listSidebarUp.service.map((item, i) => (
-              <div key={i}>
-                <span>{item}</span>
+              <div
+                key={i}
+                onClick={() => setSidebarUpActive(item)}
+                className={cn(
+                  'flex items-center gap-6 px-4 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer',
+                  { 'bg-[#f2f2f2]': sidebarUpActive === item }
+                )}
+              >
+                {item === 'settings' && <Settings className={cn('w-6 aspect-square')} />}
+                {item === 'report history' && <Report className={cn('w-6 aspect-square')} />}
+                {item === 'help' && <Help className={cn('w-6 aspect-square')} />}
+                {item === 'send feedback' && <Feedback className={cn('w-6 aspect-square')} />}
+
+                <span
+                  className={cn('capitalize text-sm', {
+                    'font-medium': sidebarUpActive === item,
+                  })}
+                >
+                  {item}
+                </span>
               </div>
             ))}
+          </div>
+
+          <div className="px-4 py-4 space-y-2">
+            <p className="text-[13px] leading-[18px] text-[#606060] font-medium">
+              About Press Copyright Contact us Creator Advertise Developers
+            </p>
+            <p className="text-[13px] leading-[18px] text-[#606060] font-medium">
+              Terms Privacy Policy & Safety How YouTube worksTest new features
+            </p>
+            <p className="text-xs leading-[18px] text-[#909090] pt-2">
+              © {new Date().getFullYear()} Codesann.
+            </p>
           </div>
         </div>
       </div>

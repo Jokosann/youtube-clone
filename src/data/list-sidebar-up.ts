@@ -31,5 +31,5 @@ export const listSidebarUp = {
   ],
   explore: ['trending', 'music', 'films', 'gaming', 'news', 'sport'],
   more: ['youtube premium', 'youtube studio', 'youtube music', 'youtube kids'],
-  service: ['settings', 'report history', 'help', 'send fedback'],
+  service: ['settings', 'report history', 'help', 'send feedback'],
 };
