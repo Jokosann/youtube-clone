@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useStore } from '../../../libs/zustand';
+import { useStore } from '../../../lib/zustand';
 import { cn } from '../../../utils/cn';
 import { listSidebarUp } from '../../../data/list-sidebar-up';
 

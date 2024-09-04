@@ -1,4 +1,4 @@
-import { useStore } from '../../libs/zustand';
+import { useStore } from '../../lib/zustand';
 import { cn } from '../../utils/cn';
 import Navbar from '../ui/navbar/Navbar';
 import SidebarUp from '../ui/sidebar/SidebarUp';
@@ -19,7 +19,7 @@ const HeaderLayout = ({ children }: { children: React.ReactNode }) => {
       <SidebarDown />
       <SidebarUp />
       <div
-        className={cn('mt-32 md:ml-20 px-6', {
+        className={cn('mt-36 md:ml-20 px-4 md:px-6', {
           'xl:ml-[240px]': sidebarActive,
         })}
       >
