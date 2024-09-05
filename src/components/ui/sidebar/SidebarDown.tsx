@@ -1,14 +1,11 @@
 import { useState } from 'react';
-import { listSidebarDown } from '../../../data/list-sidebar-down';
-import { cn } from '../../../utils/cn';
+import { listSidebarDown } from '../../../data/constants.tsx';
 
-import Home from '../svg/Home';
-import Shorts from '../svg/Shorts';
-import Subscriptions from '../svg/Subscriptions';
-import You from '../svg/You';
+import SidebarDownMenuGroub from './_components/SidebarDownMenuGroub.tsx';
+import { ISidebarDownMenuGroub } from '@/types/index.ts';
 
 const SidebarDown = () => {
-  const [sideActive, setSideActive] = useState('home');
+  const [sideActive, setSideActive] = useState('Home');
 
   return (
     <aside
@@ -16,23 +13,8 @@ const SidebarDown = () => {
       role="complementary"
       aria-label="Sidebar"
     >
-      {listSidebarDown.map((item: string, index: number) => (
-        <div
-          key={index}
-          onClick={() => setSideActive(item)}
-          className="flex flex-col items-center gap-1 cursor-pointer hover:bg-gray-100 px-4 py-3 rounded-lg"
-        >
-          {item === 'home' && <Home active={sideActive === item} className={cn('w-6 aspect-square')} />}
-          {item === 'shorts' && (
-            <Shorts active={sideActive === item} className={cn('w-6 aspect-square')} />
-          )}
-          {item === 'subscriptions' && (
-            <Subscriptions active={sideActive === item} className={cn('w-6 aspect-square')} />
-          )}
-          {item === 'you' && <You active={sideActive === item} className={cn('w-6 aspect-square')} />}
-
-          <p className="text-[10px] capitalize">{item}</p>
-        </div>
+      {listSidebarDown.map((item: ISidebarDownMenuGroub) => (
+        <SidebarDownMenuGroub key={item.name} data={item} state={{ sideActive, setSideActive }} />
       ))}
     </aside>
   );
