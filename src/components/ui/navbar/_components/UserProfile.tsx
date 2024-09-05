@@ -20,7 +20,7 @@ function UserProfile() {
           <img src={Profile} alt="Profile" className="w-8 aspect-square rounded-full cursor-pointer" />
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-[300px] max-h-screen -mt-9 mr-12 sm:mr-14 rounded-xl">
+      <DropdownMenuContent className="w-[300px] max-h-screen -mt-1 mr-4 xs:-mt-10 xs:mr-12 sm:mr-14 rounded-xl">
         <DropdownMenuLabel className="h-[104px] flex gap-4 p-4">
           <div>
             <img
@@ -37,7 +37,7 @@ function UserProfile() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator className="bg-gray-500/20" />
-        <ScrollArea className="w-full h-[calc(100vh-145px)]">
+        <ScrollArea className="w-full h-[calc(100vh-180px)] xs:h-[calc(100vh-145px)]">
           <ProfileMenuGroub data={listUserProfile.account} />
           <DropdownMenuSeparator className="bg-gray-500/20" />
 

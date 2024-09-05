@@ -7,10 +7,10 @@ import VoiceSearch from '/images/voice-search.png';
 import HambergerMenu from '../svg/HambergerMenu';
 import YoutubeLogo from '../svg/YoutubeLogo';
 import Upload from '../svg/Upload';
-import Notifications from '../svg/Notifications';
 import UserProfile from './_components/UserProfile.tsx';
 import NavbarFilter from './_components/NavbarFilter.tsx';
 import Search from './_components/Search.tsx';
+import UserNotification from './_components/UserNotification.tsx';
 
 const Navbar = () => {
   const { setSidebarActive } = useSidebar();
@@ -89,9 +89,7 @@ const Navbar = () => {
               <Upload className="w-10 aspect-square" />
             </div>
 
-            <div className="hidden w-10 aspect-square rounded-full overflow-hidden xs:grid place-content-center cursor-pointer hover:bg-gray-100">
-              <Notifications active={false} className="w-10 aspect-square" />
-            </div>
+            <UserNotification />
 
             <UserProfile />
           </div>

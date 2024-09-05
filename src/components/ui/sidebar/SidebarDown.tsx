@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { listSidebarDown } from '../../../data/constants.tsx';
 
 import SidebarDownMenuGroub from './_components/SidebarDownMenuGroub.tsx';
-import { ISidebarDownMenuGroub } from '@/types/index.ts';
+import { ISidebarMenuGroub } from '@/types/index.ts';
 
 const SidebarDown = () => {
   const [sideActive, setSideActive] = useState('Home');
@@ -13,7 +13,7 @@ const SidebarDown = () => {
       role="complementary"
       aria-label="Sidebar"
     >
-      {listSidebarDown.map((item: ISidebarDownMenuGroub) => (
+      {listSidebarDown.map((item: ISidebarMenuGroub) => (
         <SidebarDownMenuGroub key={item.name} data={item} state={{ sideActive, setSideActive }} />
       ))}
     </aside>

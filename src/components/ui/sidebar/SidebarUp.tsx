@@ -2,15 +2,6 @@ import { useState } from 'react';
 import { listSidebarUp } from '../../../data/constants.tsx';
 import useSidebar from '../../../lib/zustand/useSidebar';
 
-import YourChannel from '../svg/YourChannel';
-import History from '../svg/History';
-import Playlists from '../svg/Playlists';
-import YourVideos from '../svg/YourVideos';
-import WatchLater from '../svg/WatchLater';
-import LikedVideos from '../svg/LikedVideos';
-import Home from '../svg/Home';
-import Shorts from '../svg/Shorts';
-import Subscriptions from '../svg/Subscriptions';
 import YoutubeLogo from '../svg/YoutubeLogo';
 import HambergerMenu from '../svg/HambergerMenu';
 import Arrows from '../svg/Arrows';
@@ -64,35 +55,26 @@ const SidebarUp = () => {
         </div>
       </div>
 
-      {/* scroll shadcnUI */}
       <ScrollArea className="w-full h-full pt-[60px] xl:pt-0">
         {/* HOME */}
         <div className="px-1 pb-3 border-b border-b-gray-500/30">
           {listSidebarUp.main.map((item, i) => (
             <div
               key={i}
-              onClick={() => setSidebarUpActive(item)}
+              onClick={() => setSidebarUpActive(item.name)}
               className={cn(
                 'flex items-center gap-6 pl-3 mr-2 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer',
-                { 'bg-[#f2f2f2]': sidebarUpActive === item }
+                { 'bg-[#f2f2f2]': sidebarUpActive === item.name }
               )}
             >
-              {item === 'home' && (
-                <Home active={sidebarUpActive === item} className={cn('w-6 aspect-square')} />
-              )}
-              {item === 'shorts' && (
-                <Shorts active={sidebarUpActive === item} className={cn('w-6 aspect-square')} />
-              )}
-              {item === 'subscriptions' && (
-                <Subscriptions active={sidebarUpActive === item} className={cn('w-6 aspect-square')} />
-              )}
+              {sidebarUpActive === item.name ? item.iconActive : item.icon}
 
               <span
-                className={cn('capitalize text-sm', {
-                  'font-medium': sidebarUpActive === item,
+                className={cn('text-sm', {
+                  'font-medium': sidebarUpActive === item.name,
                 })}
               >
-                {item}
+                {item.name}
               </span>
             </div>
           ))}
@@ -110,28 +92,19 @@ const SidebarUp = () => {
           {listSidebarUp.you.map((item, i) => (
             <div
               key={i}
-              onClick={() => setSidebarUpActive(item)}
+              onClick={() => setSidebarUpActive(item.name)}
               className={cn(
                 'flex items-center gap-6 px-4 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer',
-                { 'bg-[#f2f2f2]': sidebarUpActive === item }
+                { 'bg-[#f2f2f2]': sidebarUpActive === item.name }
               )}
             >
-              {item === 'your channel' && <YourChannel className={cn('w-6 aspect-square')} />}
-              {item === 'history' && <History className={cn('w-6 aspect-square')} />}
-              {item === 'playlists' && <Playlists className={cn('w-6 aspect-square')} />}
-              {item === 'your videos' && <YourVideos className={cn('w-6 aspect-square')} />}
-              {item === 'watch later' && (
-                <WatchLater active={sidebarUpActive === item} className={cn('w-6 aspect-square')} />
-              )}
-              {item === 'liked videos' && (
-                <LikedVideos active={sidebarUpActive === item} className={cn('w-6 aspect-square')} />
-              )}
+              {sidebarUpActive === item.name && item.iconActive ? item.iconActive : item.icon}
               <span
-                className={cn('capitalize text-sm', {
-                  'font-medium': sidebarUpActive === item,
+                className={cn('text-sm', {
+                  'font-medium': sidebarUpActive === item.name,
                 })}
               >
-                {item}
+                {item.name}
               </span>
             </div>
           ))}

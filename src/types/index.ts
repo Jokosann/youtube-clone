@@ -3,8 +3,8 @@ export type IProfileMenuGoub = {
   icon: JSX.Element;
 };
 
-export type ISidebarDownMenuGroub = {
+export type ISidebarMenuGroub = {
   name: string;
   icon: JSX.Element;
-  iconActive: JSX.Element;
+  iconActive?: JSX.Element;
 };

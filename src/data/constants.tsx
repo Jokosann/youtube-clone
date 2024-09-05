@@ -22,6 +22,11 @@ import Home from '@/components/ui/svg/Home';
 import Shorts from '@/components/ui/svg/Shorts';
 import You from '@/components/ui/svg/You';
 import Subscriptions from '@/components/ui/svg/Subscriptions';
+import History from '@/components/ui/svg/History';
+import YourVideos from '@/components/ui/svg/YourVideos';
+import Playlists from '@/components/ui/svg/Playlists';
+import WatchLater from '@/components/ui/svg/WatchLater';
+import LikedVideos from '@/components/ui/svg/LikedVideos';
 
 export const navbarFilter = [
   'all',
@@ -70,8 +75,52 @@ export const listSidebarDown = [
 ];
 
 export const listSidebarUp = {
-  main: ['home', 'shorts', 'subscriptions'],
-  you: ['your channel', 'history', 'playlists', 'your videos', 'watch later', 'liked videos'],
+  main: [
+    {
+      name: 'Home',
+      icon: <Home active={false} className={cn('w-6 aspect-square')} />,
+      iconActive: <Home active={true} className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'Shorts',
+      icon: <Shorts active={false} className={cn('w-6 aspect-square')} />,
+      iconActive: <Shorts active={true} className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'Subscriptions',
+      icon: <Subscriptions active={false} className={cn('w-6 aspect-square')} />,
+      iconActive: <Subscriptions active={true} className={cn('w-6 aspect-square')} />,
+    },
+  ],
+
+  you: [
+    {
+      name: 'Your channel',
+      icon: <YourChannel className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'History',
+      icon: <History className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'Playlists',
+      icon: <Playlists className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'Your videos',
+      icon: <YourVideos className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'Watch Later',
+      icon: <WatchLater active={false} className={cn('w-6 aspect-square')} />,
+      iconActive: <WatchLater active={true} className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'Liked videos',
+      icon: <LikedVideos active={false} className={cn('w-6 aspect-square')} />,
+      iconActive: <LikedVideos active={true} className={cn('w-6 aspect-square')} />,
+    },
+  ],
   subscriptions: [
     {
       name: 'Progammer Zaman Now',

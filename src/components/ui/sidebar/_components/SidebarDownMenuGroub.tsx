@@ -1,8 +1,8 @@
 import { cn } from '@/lib/utils';
-import { ISidebarDownMenuGroub } from '@/types';
+import { ISidebarMenuGroub } from '@/types';
 
 type IProps = {
-  data: ISidebarDownMenuGroub;
+  data: ISidebarMenuGroub;
   state: {
     sideActive: string;
     setSideActive: React.Dispatch<React.SetStateAction<string>>;

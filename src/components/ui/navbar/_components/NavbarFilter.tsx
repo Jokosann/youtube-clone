@@ -25,7 +25,7 @@ const NavbarFilter = forwardRef<HTMLDivElement, IProps>(({ state }: IProps, ref)
       })}
     >
       {arrowFilterLeft && (
-        <div className="absolute top-0 left-0 flex justify-center items-center w-8 h-[60px] bg-white z-30">
+        <div className="absolute top-[10px] left-0 flex justify-center items-center w-8 h-[40px] bg-white z-30">
           <div className=" absolute top-1/2 -translate-y-1/2 -left-3 w-12 aspect-square rounded-full overflow-hidden flex justify-center items-center cursor-pointer hover:bg-gray-100">
             <Arrows className="scale-125 rotate-180" />
           </div>
@@ -44,13 +44,11 @@ const NavbarFilter = forwardRef<HTMLDivElement, IProps>(({ state }: IProps, ref)
         <div className="flex gap-3">
           {navbarFilter.map((item: string, index: number) => (
             <Button
-              variant="secondary"
+              variant={navFilter === item ? 'default' : 'secondary'}
               size="sm"
               key={index}
               onClick={() => setNavFilter(item)}
-              className={cn('rounded-lg capitalize whitespace-nowrap snap-end', {
-                'bg-black text-white': navFilter === item,
-              })}
+              className={cn('rounded-lg capitalize whitespace-nowrap snap-end')}
             >
               {item}
             </Button>
@@ -59,7 +57,7 @@ const NavbarFilter = forwardRef<HTMLDivElement, IProps>(({ state }: IProps, ref)
       </div>
 
       {arrowFilterRight && (
-        <div className="absolute top-0 right-0 flex justify-center items-center w-8 h-[60px] bg-white z-30">
+        <div className="absolute top-[10px] right-0 flex justify-center items-center w-8 h-[40px] bg-white z-30">
           <div className=" absolute top-1/2 -translate-y-1/2 -right-3 w-12 aspect-square rounded-full overflow-hidden flex justify-center items-center cursor-pointer hover:bg-gray-100">
             <Arrows className="scale-125" />
           </div>
