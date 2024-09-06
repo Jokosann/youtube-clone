@@ -41,7 +41,7 @@ const Search = forwardRef<HTMLInputElement, IProps>(({ state }: IProps, ref) => 
         </button>
       </div>
 
-      <div className="w-11 aspect-square rounded-full overflow-hidden grid place-content-center cursor-pointer bg-gray-100">
+      <div className="w-12 aspect-square rounded-full overflow-hidden grid place-content-center cursor-pointer bg-gray-100">
         <img src={VoiceSearch} alt="Upload Youtube" className="w-[14px]" />
       </div>
     </div>

@@ -27,6 +27,17 @@ import YourVideos from '@/components/ui/svg/YourVideos';
 import Playlists from '@/components/ui/svg/Playlists';
 import WatchLater from '@/components/ui/svg/WatchLater';
 import LikedVideos from '@/components/ui/svg/LikedVideos';
+import Trending from '@/components/ui/svg/Trending';
+import Music from '@/components/ui/svg/Music';
+import Films from '@/components/ui/svg/Films';
+import Gaming from '@/components/ui/svg/Gaming';
+import News from '@/components/ui/svg/News';
+import Sport from '@/components/ui/svg/Sport';
+import YoutubePremium from '@/components/ui/svg/YtPremium';
+import YoutubeStudio from '@/components/ui/svg/YtStudio';
+import YoutubeMusic from '@/components/ui/svg/YtMusic';
+import YoutubeKids from '@/components/ui/svg/YtKids';
+import Report from '@/components/ui/svg/Report';
 
 export const navbarFilter = [
   'all',
@@ -143,9 +154,74 @@ export const listSidebarUp = {
       image: User5,
     },
   ],
-  explore: ['trending', 'music', 'films', 'gaming', 'news', 'sport'],
-  more: ['youtube premium', 'youtube studio', 'youtube music', 'youtube kids'],
-  service: ['settings', 'report history', 'help', 'send feedback'],
+  explore: [
+    {
+      name: 'Trending',
+      icon: <Trending active={false} className={cn('w-6 aspect-square')} />,
+      iconActive: <Trending active={true} className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'Music',
+      icon: <Music active={false} className={cn('w-6 aspect-square')} />,
+      iconActive: <Music active={true} className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'Films',
+      icon: <Films active={false} className={cn('w-6 aspect-square')} />,
+      iconActive: <Films active={true} className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'Gaming',
+      icon: <Gaming active={false} className={cn('w-6 aspect-square')} />,
+      iconActive: <Gaming active={true} className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'News',
+      icon: <News active={false} className={cn('w-6 aspect-square')} />,
+      iconActive: <News active={true} className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'Sport',
+      icon: <Sport active={false} className={cn('w-6 aspect-square')} />,
+      iconActive: <Sport active={false} className={cn('w-6 aspect-square')} />,
+    },
+  ],
+  more: [
+    {
+      name: 'Youtube Premium',
+      icon: <YoutubePremium className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'Youtube Studio',
+      icon: <YoutubeStudio className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'Youtube Music',
+      icon: <YoutubeMusic className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'Youtube Kids',
+      icon: <YoutubeKids className={cn('w-6 aspect-square')} />,
+    },
+  ],
+  service: [
+    {
+      name: 'Settings',
+      icon: <Settings className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'Report history',
+      icon: <Report className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'Help',
+      icon: <Help className={cn('w-6 aspect-square')} />,
+    },
+    {
+      name: 'Send feedback',
+      icon: <Feedback className={cn('w-6 aspect-square')} />,
+    },
+  ],
 };
 
 export const listUserProfile = {

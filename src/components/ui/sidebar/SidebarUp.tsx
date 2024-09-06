@@ -1,26 +1,12 @@
 import { useState } from 'react';
 import { listSidebarUp } from '../../../data/constants.tsx';
 import useSidebar from '../../../lib/zustand/useSidebar';
-
 import YoutubeLogo from '../svg/YoutubeLogo';
 import HambergerMenu from '../svg/HambergerMenu';
 import Arrows from '../svg/Arrows';
-import Trending from '../svg/Trending';
-import Music from '../svg/Music';
-import Films from '../svg/Films';
-import Gaming from '../svg/Gaming';
-import News from '../svg/News';
-import Sport from '../svg/Sport';
-import YoutubePremium from '../svg/YtPremium';
-import YoutubeStudio from '../svg/YtStudio';
-import YoutubeMusic from '../svg/YtMusic';
-import YoutubeKids from '../svg/YtKids';
-import Settings from '../svg/Settings';
-import Report from '../svg/Report';
-import Help from '../svg/Help';
-import Feedback from '../svg/Feedback';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '../ScrollArea';
+import SidebarUpMenuGroub from './_components/SidebarUpMenuGroub.tsx';
 
 const SidebarUp = () => {
   const [sidebarUpActive, setSidebarUpActive] = useState('home');
@@ -30,9 +16,7 @@ const SidebarUp = () => {
     <aside
       className={cn(
         'fixed top-0 xl:top-[3.8rem] -left-[240px] z-30 w-[240px] h-screen xl:h-[calc(100vh-3.8rem)] overflow-hidden bg-white pl-2 pt-2 transition-all xl:transition-none',
-        {
-          'left-0 xl:left-0': sidebarActive,
-        }
+        { 'left-0 xl:left-0': sidebarActive }
       )}
       role="complementary"
       aria-label="Sidebar"
@@ -41,9 +25,7 @@ const SidebarUp = () => {
       <div className="w-full absolute flex items-center gap-4 px-2 bg-white z-40 xl:hidden">
         <div
           onClick={() => {
-            if (typeof setSidebarActive === 'function') {
-              setSidebarActive();
-            }
+            if (typeof setSidebarActive === 'function') setSidebarActive();
           }}
           className="w-10 aspect-square rounded-full overflow-hidden grid place-content-center cursor-pointer hover:bg-gray-100"
         >
@@ -59,54 +41,21 @@ const SidebarUp = () => {
         {/* HOME */}
         <div className="px-1 pb-3 border-b border-b-gray-500/30">
           {listSidebarUp.main.map((item, i) => (
-            <div
-              key={i}
-              onClick={() => setSidebarUpActive(item.name)}
-              className={cn(
-                'flex items-center gap-6 pl-3 mr-2 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer',
-                { 'bg-[#f2f2f2]': sidebarUpActive === item.name }
-              )}
-            >
+            <SidebarUpMenuGroub key={i} data={{ item, sidebarUpActive, setSidebarUpActive }}>
               {sidebarUpActive === item.name ? item.iconActive : item.icon}
-
-              <span
-                className={cn('text-sm', {
-                  'font-medium': sidebarUpActive === item.name,
-                })}
-              >
-                {item.name}
-              </span>
-            </div>
+            </SidebarUpMenuGroub>
           ))}
         </div>
 
         {/* YOU */}
         <div className="mt-3 pb-3 border-b border-b-gray-500/30">
-          <div
-            className={cn(
-              'flex items-center gap-2 px-3 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer'
-            )}
-          >
+          <div className="flex items-center gap-2 px-3 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer">
             <p className="font-medium ml-1">You</p> <Arrows />
           </div>
           {listSidebarUp.you.map((item, i) => (
-            <div
-              key={i}
-              onClick={() => setSidebarUpActive(item.name)}
-              className={cn(
-                'flex items-center gap-6 px-4 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer',
-                { 'bg-[#f2f2f2]': sidebarUpActive === item.name }
-              )}
-            >
+            <SidebarUpMenuGroub key={i} data={{ item, sidebarUpActive, setSidebarUpActive }}>
               {sidebarUpActive === item.name && item.iconActive ? item.iconActive : item.icon}
-              <span
-                className={cn('text-sm', {
-                  'font-medium': sidebarUpActive === item.name,
-                })}
-              >
-                {item.name}
-              </span>
-            </div>
+            </SidebarUpMenuGroub>
           ))}
         </div>
 
@@ -118,19 +67,13 @@ const SidebarUp = () => {
           {listSidebarUp.subscriptions.map((item, i) => (
             <div
               key={i}
-              className={cn(
-                'flex items-center gap-6 px-4 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer'
-              )}
+              className="flex items-center gap-6 px-4 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer"
             >
               <img src={item.image} alt={`user ${i + 1}`} className="w-6 aspect-square rounded-full" />
               <span className="truncate text-sm">{item.name}</span>
             </div>
           ))}
-          <div
-            className={cn(
-              'flex items-center gap-6 px-4 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer'
-            )}
-          >
+          <div className="flex items-center gap-6 px-4 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer">
             <div className="w-6 aspect-square flex justify-center items-center">
               <Arrows className="rotate-90 scale-125" />
             </div>
@@ -144,41 +87,9 @@ const SidebarUp = () => {
             <p className="font-medium ml-1">Explore</p>
           </div>
           {listSidebarUp.explore.map((item, i) => (
-            <div
-              key={i}
-              onClick={() => setSidebarUpActive(item)}
-              className={cn(
-                'flex items-center gap-6 px-4 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer',
-                { 'bg-[#f2f2f2]': sidebarUpActive === item }
-              )}
-            >
-              {item === 'trending' && (
-                <Trending active={sidebarUpActive === item} className={cn('w-6 aspect-square')} />
-              )}
-              {item === 'music' && (
-                <Music active={sidebarUpActive === item} className={cn('w-6 aspect-square')} />
-              )}
-              {item === 'films' && (
-                <Films active={sidebarUpActive === item} className={cn('w-6 aspect-square')} />
-              )}
-              {item === 'gaming' && (
-                <Gaming active={sidebarUpActive === item} className={cn('w-6 aspect-square')} />
-              )}
-              {item === 'news' && (
-                <News active={sidebarUpActive === item} className={cn('w-6 aspect-square')} />
-              )}
-              {item === 'sport' && (
-                <Sport active={sidebarUpActive === item} className={cn('w-6 aspect-square')} />
-              )}
-
-              <span
-                className={cn('capitalize text-sm', {
-                  'font-medium': sidebarUpActive === item,
-                })}
-              >
-                {item}
-              </span>
-            </div>
+            <SidebarUpMenuGroub key={i} data={{ item, sidebarUpActive, setSidebarUpActive }}>
+              {sidebarUpActive === item.name ? item.iconActive : item.icon}
+            </SidebarUpMenuGroub>
           ))}
         </div>
 
@@ -188,54 +99,18 @@ const SidebarUp = () => {
             <p className="font-medium ml-1">More from Youtube</p>
           </div>
           {listSidebarUp.more.map((item, i) => (
-            <div
-              key={i}
-              onClick={() => setSidebarUpActive(item)}
-              className={cn(
-                'flex items-center gap-6 px-4 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer',
-                { 'bg-[#f2f2f2]': sidebarUpActive === item }
-              )}
-            >
-              {item === 'youtube premium' && <YoutubePremium className={cn('w-6 aspect-square')} />}
-              {item === 'youtube studio' && <YoutubeStudio className={cn('w-6 aspect-square')} />}
-              {item === 'youtube music' && <YoutubeMusic className={cn('w-6 aspect-square')} />}
-              {item === 'youtube kids' && <YoutubeKids className={cn('w-6 aspect-square')} />}
-
-              <span
-                className={cn('capitalize text-sm', {
-                  'font-medium': sidebarUpActive === item,
-                })}
-              >
-                {item}
-              </span>
-            </div>
+            <SidebarUpMenuGroub key={i} data={{ item, sidebarUpActive, setSidebarUpActive }}>
+              {item.icon}
+            </SidebarUpMenuGroub>
           ))}
         </div>
 
         {/* SETTINGS */}
         <div className="pb-3 border-b border-b-gray-500/30 pt-4">
           {listSidebarUp.service.map((item, i) => (
-            <div
-              key={i}
-              onClick={() => setSidebarUpActive(item)}
-              className={cn(
-                'flex items-center gap-6 px-4 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer',
-                { 'bg-[#f2f2f2]': sidebarUpActive === item }
-              )}
-            >
-              {item === 'settings' && <Settings className={cn('w-6 aspect-square')} />}
-              {item === 'report history' && <Report className={cn('w-6 aspect-square')} />}
-              {item === 'help' && <Help className={cn('w-6 aspect-square')} />}
-              {item === 'send feedback' && <Feedback className={cn('w-6 aspect-square')} />}
-
-              <span
-                className={cn('capitalize text-sm', {
-                  'font-medium': sidebarUpActive === item,
-                })}
-              >
-                {item}
-              </span>
-            </div>
+            <SidebarUpMenuGroub key={i} data={{ item, sidebarUpActive, setSidebarUpActive }}>
+              {item.icon}
+            </SidebarUpMenuGroub>
           ))}
         </div>
 
