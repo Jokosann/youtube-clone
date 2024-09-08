@@ -1,8 +1,8 @@
-import useSidebar from '@/lib/zustand/useSidebar';
+import useSidebarStore from '@/store/useSidebarStore';
 import { forwardRef } from 'react';
-import { Button } from '../../Button';
-import { cn } from '@/lib/utils';
-import Arrows from '../../svg/Arrows';
+import { Button } from '../../ui/Button';
+import { cn } from '@/utils/cn';
+import Arrows from '@/components/ui/svg/Arrows';
 import { navbarFilter } from '@/data/constants';
 
 type IProps = {
@@ -15,13 +15,13 @@ type IProps = {
 };
 
 const NavbarFilter = forwardRef<HTMLDivElement, IProps>(({ state }: IProps, ref) => {
-  const { sidebarActive } = useSidebar();
+  const { sidebarActive } = useSidebarStore();
   const { arrowFilterLeft, arrowFilterRight, navFilter, setNavFilter } = state;
 
   return (
     <div
-      className={cn('relative flex items-center -mt-2 px-2 md:ml-20', {
-        'xl:ml-[240px]': sidebarActive,
+      className={cn('relative flex items-center -mt-2 px-2 md:ml-[70px]', {
+        'xl:ml-[254px]': sidebarActive,
       })}
     >
       {arrowFilterLeft && (

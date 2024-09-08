@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils';
-import { ISidebarMenuGroub } from '@/types';
+import { cn } from '@/utils/cn';
+import { ISidebarMenuGroub } from '@/types/navbar-sidebar';
 
 type IProps = {
   data: ISidebarMenuGroub;

@@ -1,5 +1,5 @@
-import { IProfileMenuGoub } from '@/types';
-import { DropdownMenuGroup, DropdownMenuItem } from '../../DropdownMenu';
+import { IProfileMenuGoub } from '@/types/navbar-sidebar';
+import { DropdownMenuGroup, DropdownMenuItem } from '../../ui/DropdownMenu';
 
 const ProfileMenuGroub = ({ data }: { data: IProfileMenuGoub[] }) => {
   return (

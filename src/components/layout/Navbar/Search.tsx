@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/cn';
 import { forwardRef } from 'react';
 import { CiSearch } from 'react-icons/ci';
 import { FaArrowLeft } from 'react-icons/fa6';
@@ -8,12 +8,12 @@ import VoiceSearch from '/images/voice-search.png';
 type IProps = {
   state: {
     searchActive: boolean;
-    setSeachactive: React.Dispatch<React.SetStateAction<boolean>>;
+    setSearchActive: React.Dispatch<React.SetStateAction<boolean>>;
   };
 };
 
-const Search = forwardRef<HTMLInputElement, IProps>(({ state }: IProps, ref) => {
-  const { searchActive, setSeachactive } = state;
+const Search = forwardRef<HTMLInputElement, IProps>(({ state }, ref) => {
+  const { searchActive, setSearchActive } = state;
 
   return (
     <div
@@ -22,7 +22,7 @@ const Search = forwardRef<HTMLInputElement, IProps>(({ state }: IProps, ref) => 
       })}
     >
       <div
-        onClick={() => setSeachactive(!searchActive)}
+        onClick={() => setSearchActive(!searchActive)}
         className="w-10 aspect-square rounded-full overflow-hidden grid place-content-center md:hidden cursor-pointer hover:bg-gray-100"
       >
         <FaArrowLeft className="text-xl" />

@@ -9,8 +9,8 @@ import {
 import { ScrollArea } from '@/components/ui/ScrollArea';
 
 import Profile from '/images/user1.png';
-import { listUserProfile } from '@/data/constants.tsx';
-import ProfileMenuGroub from './ProfileMenuGroub';
+import { listUserProfile } from '@/data/constants';
+import ProfileMenuGroub from '@/components/layout/Navbar/ProfileMenuGroub';
 
 function UserProfile() {
   return (

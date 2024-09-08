@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { listSidebarDown } from '../../../data/constants.tsx';
 
-import SidebarDownMenuGroub from './_components/SidebarDownMenuGroub.tsx';
-import { ISidebarMenuGroub } from '@/types/index.ts';
+import { ISidebarMenuGroub } from '@/types/navbar-sidebar.js';
+import SidebarDownMenuGroub from '@/components/layout/Sidebar/SidebarDownMenuGroub.tsx';
 
 const SidebarDown = () => {
   const [sideActive, setSideActive] = useState('Home');

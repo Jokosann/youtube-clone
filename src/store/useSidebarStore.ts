@@ -5,9 +5,9 @@ type Store = {
   setSidebarActive: () => void;
 };
 
-const useSidebar = create<Store>((set) => ({
+const useSidebarStore = create<Store>((set) => ({
   sidebarActive: false,
   setSidebarActive: () => set((state) => ({ sidebarActive: !state.sidebarActive })),
 }));
 
-export default useSidebar;
+export default useSidebarStore;

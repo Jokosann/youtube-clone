@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/cn';
 import User1 from '/images/user1.png';
 import User2 from '/images/user2.png';
 import User3 from '/images/user3.png';

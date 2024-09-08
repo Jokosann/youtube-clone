@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { listSidebarUp } from '../../../data/constants.tsx';
-import useSidebar from '../../../lib/zustand/useSidebar';
-import YoutubeLogo from '../svg/YoutubeLogo';
-import HambergerMenu from '../svg/HambergerMenu';
-import Arrows from '../svg/Arrows';
-import { cn } from '@/lib/utils';
-import { ScrollArea } from '../ScrollArea';
-import SidebarUpMenuGroub from './_components/SidebarUpMenuGroub.tsx';
+import useSidebarStore from '@/store/useSidebarStore.ts';
+import { cn } from '@/utils/cn.ts';
+import HambergerMenu from '@/components/ui/svg/HambergerMenu';
+import YoutubeLogo from '@/components/ui/svg/YoutubeLogo';
+import { ScrollArea } from '@/components/ui/ScrollArea';
+import SidebarUpMenuGroub from '@/components/layout/Sidebar/SidebarUpMenuGroub';
+import { listSidebarUp } from '@/data/constants';
+import Arrows from '@/components/ui/svg/Arrows';
 
 const SidebarUp = () => {
   const [sidebarUpActive, setSidebarUpActive] = useState('home');
-  const { sidebarActive, setSidebarActive } = useSidebar();
+  const { sidebarActive, setSidebarActive } = useSidebarStore();
 
   return (
     <aside

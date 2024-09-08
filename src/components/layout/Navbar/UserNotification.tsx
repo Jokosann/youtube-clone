@@ -7,9 +7,9 @@ import {
 } from '@/components/ui/DropdownMenu';
 
 import { ScrollArea } from '@/components/ui/ScrollArea';
-import Notifications from '../../svg/Notifications';
-import Settings from '../../svg/Settings';
-import UserNotificationMenu from './UserNotificationMenu';
+import Notifications from '@/components/ui/svg/Notifications';
+import Settings from '@/components/ui/svg/Settings';
+import UserNotificationMenu from '@/components/layout/Navbar/UserNotificationMenu';
 
 const UserNotification = () => {
   return (
