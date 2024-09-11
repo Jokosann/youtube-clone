@@ -8,7 +8,7 @@ import UserProfile from '@/components/layout/Navbar/UserProfile';
 import NavbarFilter from '@/components/layout/Navbar/NavbarFilter';
 import Search from '@/components/layout/Navbar/Search';
 import UserNotification from '@/components/layout/Navbar/UserNotification';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import { IoMdMic } from 'react-icons/io';
 import { cn } from '@/utils/cn';
@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/Button';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const inputSearchRef = useRef<HTMLInputElement | null>(null);
   const { setSidebarActive } = useSidebarStore();
@@ -80,7 +81,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      <NavbarFilter />
+      {pathname === '/' && <NavbarFilter />}
     </header>
   );
 };

@@ -110,7 +110,7 @@ body {
   height: 100%;
   background-color: black;
   opacity: 50%;
-  z-index: 20;
+  z-index: 30;
 }
 
 .back-container.active.hide {

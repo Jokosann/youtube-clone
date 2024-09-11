@@ -5,6 +5,6 @@ export type IProfileMenuGoub = {
 
 export type ISidebarMenuGroub = {
   name: string;
-  icon: JSX.Element;
+  icon: JSX.Element | string;
   iconActive?: JSX.Element;
 };

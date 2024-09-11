@@ -12,7 +12,7 @@ export const useFetchApi = <T,>(path: string, params: any) => {
         const res = await fetchApiFromYoutubeData(path, params);
         setData(res.items);
       } catch (error) {
-        console.log('error fetching data: ' + error);
+        console.log('error hooks fetching data: ' + error);
       } finally {
         setLoading(false);
       }

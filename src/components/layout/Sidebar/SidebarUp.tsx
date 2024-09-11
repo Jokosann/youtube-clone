@@ -7,26 +7,81 @@ import { ScrollArea } from '@/components/ui/ScrollArea';
 import SidebarUpMenuGroub from '@/components/layout/Sidebar/SidebarUpMenuGroub';
 import { listSidebarUp } from '@/data/constants';
 import Arrows from '@/components/ui/svg/Arrows';
+import { useLocation } from 'react-router-dom';
+import { ISidebarMenuGroub } from '@/types/navbar-sidebar';
+
+const sidebarPath = ['/detail'];
 
 const SidebarUp = () => {
   const [sidebarUpActive, setSidebarUpActive] = useState('Home');
   const { sidebarActive, setSidebarActive } = useSidebarStore();
+  const { pathname } = useLocation();
+  const isSidebarPath = sidebarPath.includes(pathname);
+
+  const handleSidebarToggle = () => {
+    if (typeof setSidebarActive === 'function') setSidebarActive();
+  };
+
+  const renderMenuGroup = (items: ISidebarMenuGroub[], title?: string) => (
+    <div className="pb-3 border-b border-b-gray-500/30">
+      {title && (
+        <div className="flex items-center gap-2 px-3 pt-4 pb-1">
+          <p className="font-medium ml-1">{title}</p>
+        </div>
+      )}
+
+      {title === 'Subscriptions' &&
+        listSidebarUp.subscriptions.map((item, i) => (
+          <div
+            key={i}
+            className="flex items-center gap-6 px-4 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer"
+          >
+            <img
+              src={item.icon}
+              alt={`user ${i + 1}`}
+              className="w-6 aspect-square rounded-full flex-shrink-0"
+            />
+            <span className="truncate text-sm">{item.name}</span>
+          </div>
+        ))}
+
+      {title === 'Subscriptions' && (
+        <div className="flex items-center gap-6 px-4 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer">
+          <div className="w-6 aspect-square flex justify-center items-center">
+            <Arrows className="rotate-90 scale-125" />
+          </div>
+          <span className="truncate text-sm">Show more</span>
+        </div>
+      )}
+
+      {title !== 'Subscriptions' &&
+        items.map((item: ISidebarMenuGroub, i: number) => (
+          <SidebarUpMenuGroub key={i} data={{ item, sidebarUpActive, setSidebarUpActive }}>
+            {sidebarUpActive === item.name && item.iconActive ? item.iconActive : item.icon}
+          </SidebarUpMenuGroub>
+        ))}
+    </div>
+  );
 
   return (
     <aside
       className={cn(
-        'fixed top-0 xl:top-[3.8rem] -left-[240px] z-30 w-[240px] h-screen xl:h-[calc(100vh-3.8rem)] overflow-hidden bg-white pl-2 pt-2 transition-all xl:transition-none',
-        { 'left-0 xl:left-0': sidebarActive }
+        'fixed z-30 w-[240px] h-screen overflow-hidden bg-white pl-2 pt-2 transition-all',
+        { '-left-[240px]': !sidebarActive },
+        { 'left-0': sidebarActive },
+        { 'top-0 xl:top-[3.8rem] xl:transition-none': !isSidebarPath },
+        { 'top-0': isSidebarPath }
       )}
       role="complementary"
       aria-label="Sidebar"
     >
-      {/* LOGO */}
-      <div className="w-full absolute flex items-center gap-4 px-2 bg-white z-40 xl:hidden">
+      <div
+        className={cn('w-full absolute top-0 left-0 flex items-center gap-4 px-2 bg-white z-[9999]', {
+          'xl:hidden': !isSidebarPath,
+        })}
+      >
         <div
-          onClick={() => {
-            if (typeof setSidebarActive === 'function') setSidebarActive();
-          }}
+          onClick={handleSidebarToggle}
           className="w-10 aspect-square rounded-full overflow-hidden grid place-content-center cursor-pointer hover:bg-gray-100"
         >
           <HambergerMenu className="w-10 aspect-square" />
@@ -38,93 +93,19 @@ const SidebarUp = () => {
       </div>
 
       <ScrollArea className="w-full h-full pt-[60px] xl:pt-0 pr-4">
-        {/* HOME */}
-        <div className="pb-3 border-b border-b-gray-500/30">
-          {listSidebarUp.main.map((item, i) => (
-            <SidebarUpMenuGroub key={i} data={{ item, sidebarUpActive, setSidebarUpActive }}>
-              {sidebarUpActive === item.name ? item.iconActive : item.icon}
-            </SidebarUpMenuGroub>
-          ))}
-        </div>
+        {renderMenuGroup(listSidebarUp.main)}
+        {renderMenuGroup(listSidebarUp.you, 'You')}
+        {renderMenuGroup(listSidebarUp.subscriptions, 'Subscriptions')}
+        {renderMenuGroup(listSidebarUp.explore, 'Explore')}
+        {renderMenuGroup(listSidebarUp.more, 'More from Youtube')}
+        {renderMenuGroup(listSidebarUp.service, 'Settings')}
 
-        {/* YOU */}
-        <div className="mt-3 pb-3 border-b border-b-gray-500/30">
-          <div className="flex items-center gap-2 px-3 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer">
-            <p className="font-medium ml-1">You</p> <Arrows />
-          </div>
-          {listSidebarUp.you.map((item, i) => (
-            <SidebarUpMenuGroub key={i} data={{ item, sidebarUpActive, setSidebarUpActive }}>
-              {sidebarUpActive === item.name && item.iconActive ? item.iconActive : item.icon}
-            </SidebarUpMenuGroub>
-          ))}
-        </div>
-
-        {/* SUBCRIPTIONS */}
-        <div className="pb-3 border-b border-b-gray-500/30">
-          <div className="flex items-center gap-2 px-3 pt-4 pb-1">
-            <p className="font-medium ml-1">Subscriptions</p>
-          </div>
-          {listSidebarUp.subscriptions.map((item, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-6 px-4 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer"
-            >
-              <img
-                src={item.image}
-                alt={`user ${i + 1}`}
-                className="w-6 aspect-square rounded-full flex-shrink-0"
-              />
-              <span className="truncate text-sm">{item.name}</span>
-            </div>
-          ))}
-          <div className="flex items-center gap-6 px-4 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer">
-            <div className="w-6 aspect-square flex justify-center items-center">
-              <Arrows className="rotate-90 scale-125" />
-            </div>
-            <span className="truncate text-sm">Show more</span>
-          </div>
-        </div>
-
-        {/* EXPLORE */}
-        <div className="pb-3 border-b border-b-gray-500/30">
-          <div className="flex items-center gap-2 px-3 pt-4 pb-1">
-            <p className="font-medium ml-1">Explore</p>
-          </div>
-          {listSidebarUp.explore.map((item, i) => (
-            <SidebarUpMenuGroub key={i} data={{ item, sidebarUpActive, setSidebarUpActive }}>
-              {sidebarUpActive === item.name ? item.iconActive : item.icon}
-            </SidebarUpMenuGroub>
-          ))}
-        </div>
-
-        {/* MORE */}
-        <div className="pb-3 border-b border-b-gray-500/30">
-          <div className="flex items-center gap-2 px-3 pt-4 pb-1">
-            <p className="font-medium ml-1">More from Youtube</p>
-          </div>
-          {listSidebarUp.more.map((item, i) => (
-            <SidebarUpMenuGroub key={i} data={{ item, sidebarUpActive, setSidebarUpActive }}>
-              {item.icon}
-            </SidebarUpMenuGroub>
-          ))}
-        </div>
-
-        {/* SETTINGS */}
-        <div className="pb-3 border-b border-b-gray-500/30 pt-4">
-          {listSidebarUp.service.map((item, i) => (
-            <SidebarUpMenuGroub key={i} data={{ item, sidebarUpActive, setSidebarUpActive }}>
-              {item.icon}
-            </SidebarUpMenuGroub>
-          ))}
-        </div>
-
-        {/* FOOTER */}
         <div className="px-4 py-4 space-y-2">
           <p className="text-[13px] leading-[18px] text-[#606060] font-medium">
             About Press Copyright Contact us Creator Advertise Developers
           </p>
           <p className="text-[13px] leading-[18px] text-[#606060] font-medium">
-            Terms Privacy Policy & Safety How YouTube worksTest new features
+            Terms Privacy Policy & Safety How YouTube works Test new features
           </p>
           <p className="text-xs leading-[18px] text-[#909090] pt-2">
             © {new Date().getFullYear()} Codesann.

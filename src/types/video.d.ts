@@ -2,6 +2,7 @@ export interface DataVideoYoutube {
   kind: Kind;
   etag: string;
   id: string;
+  player: Player;
   snippet: Snippet;
   contentDetails: ContentDetails;
   statistics: Statistics;
@@ -19,6 +20,10 @@ export interface ContentDetails {
 }
 
 export interface ContentRating {}
+
+export interface Player {
+  embedHtml: string;
+}
 
 export enum Definition {
   HD = 'hd',

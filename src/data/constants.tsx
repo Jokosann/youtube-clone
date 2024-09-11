@@ -135,23 +135,23 @@ export const listSidebarUp = {
   subscriptions: [
     {
       name: 'Progammer Zaman Now',
-      image: User1,
+      icon: User1,
     },
     {
       name: 'Web Progamming UNPAS',
-      image: User2,
+      icon: User2,
     },
     {
       name: 'VIP CODE STUDIO',
-      image: User3,
+      icon: User3,
     },
     {
       name: 'VoidFnc',
-      image: User4,
+      icon: User4,
     },
     {
       name: 'Dea Afrizal',
-      image: User5,
+      icon: User5,
     },
   ],
   explore: [
