@@ -69,21 +69,15 @@
   }
 }
 
+@layer components {
+  .center {
+    @apply flex justify-center items-center;
+  }
+}
+
 html,
 body {
   font-family: 'Roboto', sans-serif;
-}
-
-.mask-right {
-  mask: linear-gradient(90deg, white 80%, white 20%, transparent);
-}
-
-.mask-left {
-  mask: linear-gradient(90deg, transparent, white 20%, white 80%);
-}
-
-.mask {
-  mask: linear-gradient(90deg, transparent, white 20%, white 80%, white 80%, white 20%, transparent);
 }
 
 .scroll-fillter-container {

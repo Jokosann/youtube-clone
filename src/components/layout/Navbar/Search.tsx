@@ -1,9 +1,10 @@
 import { cn } from '@/utils/cn';
 import { forwardRef } from 'react';
-import { CiSearch } from 'react-icons/ci';
 import { FaArrowLeft } from 'react-icons/fa6';
 
-import VoiceSearch from '/images/voice-search.png';
+import { IoMdMic } from 'react-icons/io';
+import SearchSvg from '@/components/ui/svg/SearchSvg';
+import { Button } from '@/components/ui/Button';
 
 type IProps = {
   state: {
@@ -17,8 +18,8 @@ const Search = forwardRef<HTMLInputElement, IProps>(({ state }, ref) => {
 
   return (
     <div
-      className={cn('max-w-3xl w-full hidden md:flex gap-4 md:px-8 xl:px-16', {
-        'absolute md:relative top-0 left-0 right-0 flex gap-2 bg-white p-2 md:p-0': searchActive,
+      className={cn('max-w-[650px] hidden md:flex flex-grow gap-4', {
+        'flex max-w-full mx-auto': searchActive,
       })}
     >
       <div
@@ -28,22 +29,22 @@ const Search = forwardRef<HTMLInputElement, IProps>(({ state }, ref) => {
         <FaArrowLeft className="text-xl" />
       </div>
 
-      <div className={cn('w-full mx-auto flex border border-slate-500/50 rounded-full overflow-hidden')}>
+      <div className="flex flex-grow border border-slate-500/50 rounded-full overflow-hidden">
         <input
           ref={ref}
           type="search"
           name="search"
           placeholder="Search"
-          className="w-[85%] lg:w-[90%] h-full border-r rounded-l-full border-slate-500/50 outline-none focus:border focus:border-blue-500/80 px-4 py-2"
+          className="w-full h-full border-r rounded-l-full border-slate-500/50 outline-none focus:border focus:border-blue-500/80 px-4"
         />
-        <button className="w-[15%] lg:w-[10%] h-full flex justify-center items-center bg-gray-100">
-          <CiSearch className="text-2xl" />
-        </button>
+        <div className="center bg-secondary px-5 cursor-pointer">
+          <SearchSvg />
+        </div>
       </div>
 
-      <div className="w-12 aspect-square rounded-full overflow-hidden grid place-content-center cursor-pointer bg-gray-100">
-        <img src={VoiceSearch} alt="Upload Youtube" className="w-[14px]" />
-      </div>
+      <Button type="button" variant="secondary" size="icon" className="flex-shrink-0">
+        <IoMdMic size={22} />
+      </Button>
     </div>
   );
 });

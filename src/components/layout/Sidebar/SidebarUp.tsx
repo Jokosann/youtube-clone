@@ -9,7 +9,7 @@ import { listSidebarUp } from '@/data/constants';
 import Arrows from '@/components/ui/svg/Arrows';
 
 const SidebarUp = () => {
-  const [sidebarUpActive, setSidebarUpActive] = useState('home');
+  const [sidebarUpActive, setSidebarUpActive] = useState('Home');
   const { sidebarActive, setSidebarActive } = useSidebarStore();
 
   return (
@@ -37,9 +37,9 @@ const SidebarUp = () => {
         </div>
       </div>
 
-      <ScrollArea className="w-full h-full pt-[60px] xl:pt-0">
+      <ScrollArea className="w-full h-full pt-[60px] xl:pt-0 pr-4">
         {/* HOME */}
-        <div className="px-1 pb-3 border-b border-b-gray-500/30">
+        <div className="pb-3 border-b border-b-gray-500/30">
           {listSidebarUp.main.map((item, i) => (
             <SidebarUpMenuGroub key={i} data={{ item, sidebarUpActive, setSidebarUpActive }}>
               {sidebarUpActive === item.name ? item.iconActive : item.icon}
@@ -69,7 +69,11 @@ const SidebarUp = () => {
               key={i}
               className="flex items-center gap-6 px-4 py-2 hover:bg-[#f2f2f2] rounded-lg cursor-pointer"
             >
-              <img src={item.image} alt={`user ${i + 1}`} className="w-6 aspect-square rounded-full" />
+              <img
+                src={item.image}
+                alt={`user ${i + 1}`}
+                className="w-6 aspect-square rounded-full flex-shrink-0"
+              />
               <span className="truncate text-sm">{item.name}</span>
             </div>
           ))}

@@ -38,7 +38,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       <SidebarDown />
       <SidebarUp />
       <div
-        className={cn('mt-[135px] md:ml-14 px-4 md:px-6', {
+        className={cn('mt-[135px] md:ml-16 px-6', {
           'xl:ml-[240px]': sidebarActive,
         })}
       >

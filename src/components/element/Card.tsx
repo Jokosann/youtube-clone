@@ -1,40 +1,61 @@
 import { EllipsisVertical } from 'lucide-react';
+import { Button } from '../ui/Button';
+import { DataVideoYoutube } from '@/types/video';
+import { useEffect, useState } from 'react';
+import { fetchApiFromYoutubeData } from '@/utils/fetchApi';
+import { formatViewCount } from '@/utils/formatViewCount';
+import { formatPublishTime } from '@/utils/formatPublishTime';
 
-const Card = () => {
+const Card = ({ video }: { video: DataVideoYoutube }) => {
+  const [channel, setChannel] = useState<DataVideoYoutube>({} as DataVideoYoutube);
+
+  useEffect(() => {
+    const fetchChannelData = async () => {
+      const data = await fetchApiFromYoutubeData('/channels', {
+        part: 'snippet,contentDetails,statistics',
+        id: video?.snippet?.channelId,
+      });
+      setChannel(data?.items[0]);
+    };
+
+    fetchChannelData();
+  }, [video]);
+
   return (
-    <div className="w-full h-full space-y-3">
-      <div className="w-full rounded-xl overflow-hidden">
+    <div className="w-full h-full cursor-pointer">
+      <div className="relative w-full aspect-[2/1.15] rounded-xl overflow-hidden z-0">
         <img
-          src="https://i.ytimg.com/vi/uezmvBiPgCc/hqdefault.jpg"
-          alt="test card"
-          className="w-full aspect-[2/1.15] object-cover"
+          src={video.snippet.thumbnails.medium.url}
+          alt={video?.snippet?.channelTitle}
+          className="w-full h-full object-cover"
         />
+
+        <div className="bg-black/80 absolute bottom-1 right-1 text-white text-xs font-medium px-1.5 py-1 rounded-md">
+          1:23:23
+        </div>
       </div>
-      <div className="flex">
-        <div className="w-12 h-full mr-3 overflow-hidden rounded-full">
+
+      <div className="flex gap-3 py-3">
+        <div className="w-9 flex-shrink-0 overflow-hidden mt-1">
           <img
-            src="https://i.ytimg.com/vi/wRJmkKGRelU/hqdefault.jpg"
-            alt="test card"
+            src={channel?.snippet?.thumbnails?.medium?.url}
+            alt={channel?.snippet?.channelTitle}
             className="w-full aspect-square rounded-full object-cover"
           />
         </div>
         <div className="max-w-full w-full">
-          <p className="line-clamp-2 mb-[5px] font-medium">
-            Lorem ipsum dolor sit amet const adipi elit. Tenetur sunt reprehenderit sequi sapiente
-            expedita! Odio eos mollitia maiores consequatur debitis.
-          </p>
-          <p className="text-sm text-gray-600">Joko Santoso</p>
+          <p className="line-clamp-2 mb-0.5 text-base font-medium">{video?.snippet?.title}</p>
+          <p className="text-sm text-gray-600">{video?.snippet?.channelTitle}</p>
           <div className="text-sm flex items-center gap-1 text-gray-600">
-            <p>3.5M views</p>
+            <p>{formatViewCount(Number(video?.statistics?.viewCount))} views</p>
             <div className="w-[4px] aspect-square rounded-full bg-gray-600" />
-            <p>5 mounth ago</p>
+            <p>{formatPublishTime(video?.snippet?.publishedAt)}</p>
           </div>
         </div>
-        <div>
-          <div className="w-8 aspect-square flex items-start justify-end rounded-full cursor-pointer">
-            <EllipsisVertical size={20} className="" />
-          </div>
-        </div>
+
+        <Button size="icon" variant="ghost" className="flex-shrink-0 -mr-2 -mt-2">
+          <EllipsisVertical size={20} />
+        </Button>
       </div>
     </div>
   );

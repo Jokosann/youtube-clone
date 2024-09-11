@@ -1,54 +1,77 @@
-import useSidebarStore from '@/store/useSidebarStore';
-import { forwardRef } from 'react';
-import { Button } from '../../ui/Button';
-import { cn } from '@/utils/cn';
+import { useEffect, useRef, useState } from 'react';
 import Arrows from '@/components/ui/svg/Arrows';
 import { navbarFilter } from '@/data/constants';
+import { Button } from '@/components/ui/Button';
+import useSidebarStore from '@/store/useSidebarStore';
+import { cn } from '@/utils/cn';
 
-type IProps = {
-  state: {
-    navFilter: string;
-    setNavFilter: React.Dispatch<React.SetStateAction<string>>;
-    arrowFilterRight: boolean;
-    arrowFilterLeft: boolean;
-  };
-};
-
-const NavbarFilter = forwardRef<HTMLDivElement, IProps>(({ state }: IProps, ref) => {
+const NavbarFilter = () => {
   const { sidebarActive } = useSidebarStore();
-  const { arrowFilterLeft, arrowFilterRight, navFilter, setNavFilter } = state;
+
+  const navFilterRef = useRef<HTMLDivElement | null>(null);
+
+  const [translate, setTranslate] = useState(0);
+  const [navFilter, setNavFilter] = useState('all');
+  const [arrowFilterRight, setArrowFilterRight] = useState(false);
+  const [arrowFilterLeft, setArrowFilterLeft] = useState(false);
+
+  useEffect(() => {
+    if (navFilterRef.current == null) return;
+
+    const observer = new ResizeObserver((entries) => {
+      const container = entries[0]?.target;
+      if (container == null) return;
+      setArrowFilterLeft(translate > 0);
+      setArrowFilterRight(translate + container.clientWidth < container.scrollWidth);
+    });
+
+    observer.observe(navFilterRef.current);
+
+    return () => observer.disconnect();
+  }, [translate]);
+
+  function handleClickArrowLeft() {
+    setTranslate((prevTranslate) => {
+      const newTranslate = prevTranslate - 200;
+
+      if (newTranslate <= 0) return 0;
+      return newTranslate;
+    });
+  }
+
+  function handleClickArrowRight() {
+    setTranslate((prevTranslate) => {
+      if (navFilterRef.current == null) return prevTranslate;
+
+      const newTranslate = translate + 200;
+      const edge = navFilterRef.current.scrollWidth;
+      const width = navFilterRef.current.clientWidth;
+
+      if (newTranslate + width >= edge) return edge - width;
+      return newTranslate;
+    });
+  }
 
   return (
     <div
-      className={cn('relative flex items-center -mt-2 px-2 md:ml-[70px]', {
-        'xl:ml-[254px]': sidebarActive,
+      className={cn('relative px-2 md:ml-16', {
+        'xl:ml-[240px]': sidebarActive,
       })}
     >
-      {arrowFilterLeft && (
-        <div className="absolute top-[10px] left-0 flex justify-center items-center w-8 h-[40px] bg-white z-30">
-          <div className=" absolute top-1/2 -translate-y-1/2 -left-3 w-12 aspect-square rounded-full overflow-hidden flex justify-center items-center cursor-pointer hover:bg-gray-100">
-            <Arrows className="scale-125 rotate-180" />
-          </div>
-        </div>
-      )}
-
-      <div
-        ref={ref}
-        className={cn(
-          'w-full scroll-fillter-container overflow-x-auto mt-3',
-          { 'mask-left': arrowFilterLeft && !arrowFilterRight },
-          { 'mask-right': arrowFilterRight && !arrowFilterLeft },
-          { mask: arrowFilterRight && arrowFilterLeft }
-        )}
-      >
-        <div className="flex gap-3">
+      <div ref={navFilterRef} className="w-full overflow-hidden mt-3">
+        <div
+          className="flex whitespace-nowrap gap-3 transition-transform w-[max-content]"
+          style={{
+            transform: `translateX(-${translate}px)`,
+          }}
+        >
           {navbarFilter.map((item: string, index: number) => (
             <Button
               variant={navFilter === item ? 'default' : 'secondary'}
               size="sm"
               key={index}
               onClick={() => setNavFilter(item)}
-              className={cn('rounded-lg capitalize whitespace-nowrap snap-end')}
+              className="rounded-lg capitalize text-sm font-medium whitespace-nowrap snap-end"
             >
               {item}
             </Button>
@@ -56,15 +79,23 @@ const NavbarFilter = forwardRef<HTMLDivElement, IProps>(({ state }: IProps, ref)
         </div>
       </div>
 
+      {arrowFilterLeft && (
+        <div className="absolute top-0 left-0 flex justify-start bg-gradient-to-r from-white from-50% to-transparent items-center w-28 h-full z-30">
+          <Button variant="ghost" size="icon" onClick={handleClickArrowLeft}>
+            <Arrows className="scale-125 rotate-180" />
+          </Button>
+        </div>
+      )}
+
       {arrowFilterRight && (
-        <div className="absolute top-[10px] right-0 flex justify-center items-center w-8 h-[40px] bg-white z-30">
-          <div className=" absolute top-1/2 -translate-y-1/2 -right-3 w-12 aspect-square rounded-full overflow-hidden flex justify-center items-center cursor-pointer hover:bg-gray-100">
+        <div className="absolute top-0 right-0 flex justify-end bg-gradient-to-l from-white from-50% to-transparent items-center w-28 h-full z-30">
+          <Button variant="ghost" size="icon" onClick={handleClickArrowRight}>
             <Arrows className="scale-125" />
-          </div>
+          </Button>
         </div>
       )}
     </div>
   );
-});
+};
 
 export default NavbarFilter;

@@ -16,7 +16,7 @@ function UserProfile() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="w-10 aspect-square rounded-full overflow-hidden grid place-content-center">
+        <div className="w-10  aspect-square rounded-full overflow-hidden center">
           <img src={Profile} alt="Profile" className="w-8 aspect-square rounded-full cursor-pointer" />
         </div>
       </DropdownMenuTrigger>
