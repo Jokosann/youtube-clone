@@ -76,7 +76,8 @@
 }
 
 html,
-body {
+body,
+pre {
   font-family: 'Roboto', sans-serif;
 }
 
