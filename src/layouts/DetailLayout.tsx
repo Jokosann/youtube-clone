@@ -16,7 +16,7 @@ const DetailLayout = ({ children }: { children: React.ReactNode }) => {
       <div onClick={handleSidebarToggle} className={cn('back-container', { active: sidebarActive })} />
       <Navbar />
       <SidebarUp />
-      <div className="mt-20 px-6">{children}</div>
+      <div className="mt-20 px-4 sm:px-6">{children}</div>
     </>
   );
 };

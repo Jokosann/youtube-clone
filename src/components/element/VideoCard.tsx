@@ -20,8 +20,6 @@ const VideoCard = ({ video }: { video: DataVideoYoutube }) => {
 
   const channel: Channel | null = data && data[0];
 
-  // console.log();
-
   return (
     <div className="w-full h-full cursor-pointer">
       <div
@@ -54,9 +52,11 @@ const VideoCard = ({ video }: { video: DataVideoYoutube }) => {
         </Link>
         <div className="max-w-full w-full">
           <p className="line-clamp-2 mb-0.5 text-base font-medium">{video?.snippet?.title}</p>
+
           <Link to={`/channel?user=${channel?.snippet?.customUrl}`} className="text-sm text-gray-600">
             {video?.snippet?.channelTitle}
           </Link>
+
           <div className="text-sm flex items-center gap-[6px] text-gray-600">
             <p>{formatViewCount(Number(video?.statistics?.viewCount))} views</p>
             <div className="w-[3px] aspect-square rounded-full bg-gray-600" />

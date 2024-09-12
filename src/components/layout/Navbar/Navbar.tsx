@@ -34,10 +34,10 @@ const Navbar = () => {
   }, [isDekstop]);
 
   return (
-    <header className="fixed w-full top-0 left-0 right-0 px-4 py-2 bg-white z-20">
+    <header className="fixed w-full top-0 left-0 right-0 px-4 sm:px-6 py-2 bg-white z-20">
       <nav className="flex justify-between gap-10 md:gap-20 mb-5">
         <div
-          className={cn('flex flex-shrink-0 items-center gap-4', {
+          className={cn('flex flex-shrink-0 items-center gap-4 -ml-2', {
             hidden: searchActive,
           })}
         >
