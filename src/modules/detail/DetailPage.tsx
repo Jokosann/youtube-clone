@@ -9,12 +9,14 @@ import ChannelDetail from './components/ChannelDetail';
 import ActionDetail from './components/ActionDetail';
 import DescriptionDetail from './components/DescriptionDetail';
 import Loading from '@/components/ui/Loading';
+import { CommentVideo } from '@/types/comment';
 
 const DetailPage = () => {
   const [searchParams] = useSearchParams();
   const videoId = searchParams.get('v');
 
   const [video, setVideo] = useState<DataVideoYoutube | null>(null);
+  const [comments, setComments] = useState<CommentVideo[] | null>(null);
   const [channel, setChannel] = useState<Channel | null>(null);
 
   useEffect(() => {
@@ -30,7 +32,21 @@ const DetailPage = () => {
       }
     };
 
+    const fetchVideoComment = async () => {
+      try {
+        const response = await fetchApiFromYoutubeData('/commentThreads', {
+          part: 'snippet',
+          videoId: videoId,
+          maxResults: 10,
+        });
+        setComments(response?.items);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     fetchVideoDetail();
+    fetchVideoComment();
   }, [videoId]);
 
   useEffect(() => {
@@ -51,8 +67,9 @@ const DetailPage = () => {
     }
   }, [video]);
 
-  // console.log({ video, channel });
   if (!video) return <Loading />;
+
+  // console.log(comments);
 
   return (
     <DetailLayout>

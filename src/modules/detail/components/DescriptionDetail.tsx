@@ -4,6 +4,9 @@ import { formatPublishTime, formatPublishTimeDetail } from '@/utils/formatPublis
 import { formatViewCount } from '@/utils/formatViewCount';
 import { useRef, useState } from 'react';
 
+const RenderHastag = ({ value }: { value: string | undefined }) => {
+  return <span className="text-[#0961d4]">#{value}</span>;
+};
 const DescriptionDetail = ({ video }: { video: DataVideoYoutube | null }) => {
   const moreRef = useRef<HTMLDivElement | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -13,10 +16,6 @@ const DescriptionDetail = ({ video }: { video: DataVideoYoutube | null }) => {
       moreRef.current.style.height = isExpanded ? '112px' : 'auto';
       setIsExpanded(!isExpanded);
     }
-  };
-
-  const renderHastag = (value: string | undefined) => {
-    return <span className="text-[#0961d4]">#{value}</span>;
   };
 
   if (!video) return <Skeleton className="w-full h-28 rounded-xl" />;
@@ -31,20 +30,16 @@ const DescriptionDetail = ({ video }: { video: DataVideoYoutube | null }) => {
               ? formatPublishTimeDetail(video.snippet.publishedAt)
               : formatPublishTime(video.snippet.publishedAt)}
           </span>
-          {renderHastag(video?.snippet?.tags && video?.snippet?.tags[0])}
-          {renderHastag(video?.snippet?.tags && video?.snippet?.tags[1])}
-          {renderHastag(video?.snippet?.tags && video?.snippet?.tags[2])}
+          <RenderHastag value={video?.snippet?.tags && video?.snippet?.tags[0]} />
+          <RenderHastag value={video?.snippet?.tags && video?.snippet?.tags[1]} />
+          <RenderHastag value={video?.snippet?.tags && video?.snippet?.tags[2]} />
         </div>
 
         <pre className="text-wrap mb-6">{video?.snippet?.description}</pre>
 
         <div className="flex flex-wrap justify-start gap-x-1 mb-4">
           {video?.snippet?.tags &&
-            video?.snippet?.tags.map((item: string, i: number) => (
-              <span key={i} className="text-[#0961d4]">
-                #{item}
-              </span>
-            ))}
+            video?.snippet?.tags.map((item: string, i: number) => <RenderHastag key={i} value={item} />)}
         </div>
 
         <div onClick={handleMoreClick} className="cursor-pointer pt-2 font-medium">
@@ -55,7 +50,7 @@ const DescriptionDetail = ({ video }: { video: DataVideoYoutube | null }) => {
       {!isExpanded && (
         <div
           onClick={handleMoreClick}
-          className="absolute bottom-0 right-0 bg-gradient-to-l from-[#f2f2f2] from-90% to-transparent text-sm font-medium pb-1 px-4 cursor-pointer"
+          className="absolute bottom-0 right-0 bg-gradient-to-l from-[#f2f2f2] from-90% to-transparent text-sm font-medium px-4 cursor-pointer"
         >
           ...more
         </div>

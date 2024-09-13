@@ -8,17 +8,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Channel } from '@/types/channel';
 import { formatDuration } from '@/utils/formatDuration';
 import useSidebarStore from '@/store/useSidebarStore';
+import Image from '@/components/ui/Image';
+import Profile from '/images/user_profile.jpg';
 
 const VideoCard = ({ video }: { video: DataVideoYoutube }) => {
   const { sidebarActive, setSidebarActive } = useSidebarStore();
   const navigate = useNavigate();
 
-  const { data } = useFetchApi<Channel>('/channels', {
+  const { dataFirst: channel } = useFetchApi<Channel>('/channels', {
     part: 'snippet,contentDetails,statistics',
     id: video?.snippet?.channelId,
   });
-
-  const channel: Channel | null = data && data[0];
 
   return (
     <div className="w-full h-full cursor-pointer">
@@ -29,12 +29,14 @@ const VideoCard = ({ video }: { video: DataVideoYoutube }) => {
         }}
         className="relative w-full aspect-[2/1.15] rounded-xl overflow-hidden z-0"
       >
-        <img
-          src={video.snippet.thumbnails.medium.url}
+        <Image
+          src={video?.snippet?.thumbnails?.medium?.url}
           alt={video?.snippet?.channelTitle}
-          className="w-full h-full object-cover"
+          width="100%"
+          height="100%"
+          className="object-cover rounded-xl"
         />
-        <div className="bg-black/60 absolute bottom-1 right-1 text-white text-xs font-medium px-1.5 py-1 rounded-md">
+        <div className="bg-black/60 absolute bottom-2 right-2 text-white text-xs font-medium px-1.5 py-1 rounded-md">
           {formatDuration(video?.contentDetails?.duration)}
         </div>
       </div>
@@ -44,10 +46,12 @@ const VideoCard = ({ video }: { video: DataVideoYoutube }) => {
           to={`/channel?u=${channel?.snippet?.customUrl}`}
           className="w-9 flex-shrink-0 overflow-hidden mt-1"
         >
-          <img
-            src={channel?.snippet?.thumbnails?.medium?.url}
-            alt={channel?.snippet?.title}
-            className="w-full aspect-square rounded-full object-cover"
+          <Image
+            src={channel ? channel?.snippet?.thumbnails?.medium?.url : Profile}
+            alt={channel ? channel?.snippet?.title : 'profile'}
+            width="100%"
+            height="100%"
+            className="rounded-full object-cover"
           />
         </Link>
         <div className="max-w-full w-full">

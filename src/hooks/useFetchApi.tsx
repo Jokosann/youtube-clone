@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 export const useFetchApi = <T,>(path: string, params: any) => {
   const [data, setData] = useState<T[] | null>([]);
+  const [dataFirst, setDataFirst] = useState<T | null>({} as T);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -11,6 +12,7 @@ export const useFetchApi = <T,>(path: string, params: any) => {
       try {
         const res = await fetchApiFromYoutubeData(path, params);
         setData(res.items);
+        setDataFirst(res.items[0]);
       } catch (error) {
         console.log('error hooks fetching data: ' + error);
       } finally {
@@ -21,5 +23,5 @@ export const useFetchApi = <T,>(path: string, params: any) => {
     fetchDataApi();
   }, [path]);
 
-  return { data, loading };
+  return { data, dataFirst, loading };
 };
