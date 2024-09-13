@@ -19,7 +19,6 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       body.removeAttribute('style');
     }
 
-    // Cleanup on unmount
     return () => body.removeAttribute('style');
   }, [isDesktopLarge, sidebarActive]);
 

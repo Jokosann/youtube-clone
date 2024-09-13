@@ -41,7 +41,7 @@ const VideoCard = ({ video }: { video: DataVideoYoutube }) => {
 
       <div className="flex gap-3 py-3">
         <Link
-          to={`/channel?user=${channel?.snippet?.customUrl}`}
+          to={`/channel?u=${channel?.snippet?.customUrl}`}
           className="w-9 flex-shrink-0 overflow-hidden mt-1"
         >
           <img
@@ -53,7 +53,7 @@ const VideoCard = ({ video }: { video: DataVideoYoutube }) => {
         <div className="max-w-full w-full">
           <p className="line-clamp-2 mb-0.5 text-base font-medium">{video?.snippet?.title}</p>
 
-          <Link to={`/channel?user=${channel?.snippet?.customUrl}`} className="text-sm text-gray-600">
+          <Link to={`/channel?u=${channel?.snippet?.customUrl}`} className="text-sm text-gray-600">
             {video?.snippet?.channelTitle}
           </Link>
 

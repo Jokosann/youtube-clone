@@ -4,10 +4,6 @@ import VideoCardSkeleton from '@/components/ui/VideoCardSkeleton';
 import { DataVideoYoutube } from '@/types/video';
 import MainLayout from '@/layouts/MainLayout';
 
-// import VideoCardTest from '@/components/element/VideoCardTest';
-// import { videos } from '@/data/constants';
-// import { VideoYoutubeTest } from '@/types/video-test';
-
 const HomePage = () => {
   const { data, loading } = useFetchApi<DataVideoYoutube>('/videos', {
     part: 'snippet,contentDetails,statistics',
@@ -24,12 +20,8 @@ const HomePage = () => {
         {loading ? (
           <VideoCardSkeleton />
         ) : (
-          data?.map((video: DataVideoYoutube, i: number) => <VideoCard key={i} video={video} />)
+          data && data.map((video: DataVideoYoutube, i: number) => <VideoCard key={i} video={video} />)
         )}
-
-        {/* {videos.map((video: VideoYoutubeTest, i) => (
-          <VideoCardTest key={i} video={video} />
-        ))} */}
       </div>
     </MainLayout>
   );
