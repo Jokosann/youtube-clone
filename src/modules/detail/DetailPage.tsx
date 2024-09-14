@@ -10,6 +10,7 @@ import ActionDetail from './components/ActionDetail';
 import DescriptionDetail from './components/DescriptionDetail';
 import Loading from '@/components/ui/Loading';
 import { CommentVideo } from '@/types/comment';
+import CommentDetail from './components/CommentDetail';
 
 const DetailPage = () => {
   const [searchParams] = useSearchParams();
@@ -93,7 +94,7 @@ const DetailPage = () => {
           <DescriptionDetail video={video} />
 
           {/* comment */}
-          <div></div>
+          <CommentDetail comments={comments} />
         </div>
 
         {/* category */}
