@@ -9,8 +9,6 @@ import Profile from '/images/user_profile.jpg';
 import { formatPublishTime } from '@/utils/formatPublishTime';
 
 const CommentList = ({ comment }: { comment: CommentVideo | null }) => {
-  console.log(comment);
-
   return (
     <div className="flex justify-between">
       <div className="w-14 flex-shrink-0">

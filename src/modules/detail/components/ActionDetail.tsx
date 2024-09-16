@@ -24,7 +24,7 @@ const ActionDetail = ({ video }: { video: DataVideoYoutube | null }) => {
           className="relative w-[60%] flex-shrink-0 flex gap-1 rounded-none hover:bg-[#edecec] whitespace-nowrap"
         >
           {!likeActive ? (
-            <BiLike size={23} className="flex-shrink-0" />
+            <BiLike size={23} strokeWidth={0} className="flex-shrink-0" />
           ) : (
             <BiSolidLike size={23} className="flex-shrink-0" />
           )}

@@ -2,12 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import Arrows from '@/components/ui/svg/Arrows';
 import { navbarFilter } from '@/data/constants';
 import { Button } from '@/components/ui/Button';
-import useSidebarStore from '@/store/useSidebarStore';
-import { cn } from '@/utils/cn';
 
-const NavbarFilter = () => {
-  const { sidebarActive } = useSidebarStore();
-
+const CategoryPills = () => {
   const navFilterRef = useRef<HTMLDivElement | null>(null);
 
   const [translate, setTranslate] = useState(0);
@@ -53,30 +49,24 @@ const NavbarFilter = () => {
   }
 
   return (
-    <div
-      className={cn('relative px-2 md:ml-16', {
-        'xl:ml-[240px]': sidebarActive,
-      })}
-    >
-      <div ref={navFilterRef} className="w-full overflow-hidden mt-3">
-        <div
-          className="flex whitespace-nowrap gap-3 transition-transform w-[max-content]"
-          style={{
-            transform: `translateX(-${translate}px)`,
-          }}
-        >
-          {navbarFilter.map((item: string, index: number) => (
-            <Button
-              variant={navFilter === item ? 'default' : 'secondary'}
-              size="sm"
-              key={index}
-              onClick={() => setNavFilter(item)}
-              className="rounded-lg capitalize text-sm font-medium whitespace-nowrap snap-end"
-            >
-              {item}
-            </Button>
-          ))}
-        </div>
+    <div ref={navFilterRef} className="relative w-full overflow-hidden mt-3">
+      <div
+        className="flex whitespace-nowrap gap-3 transition-transform w-[max-content]"
+        style={{
+          transform: `translateX(-${translate}px)`,
+        }}
+      >
+        {navbarFilter.map((item: string, index: number) => (
+          <Button
+            variant={navFilter === item ? 'default' : 'secondary'}
+            size="sm"
+            key={index}
+            onClick={() => setNavFilter(item)}
+            className="rounded-lg capitalize text-sm font-medium whitespace-nowrap snap-end"
+          >
+            {item}
+          </Button>
+        ))}
       </div>
 
       {arrowFilterLeft && (
@@ -98,4 +88,4 @@ const NavbarFilter = () => {
   );
 };
 
-export default NavbarFilter;
+export default CategoryPills;

@@ -10,11 +10,12 @@ const RenderHastag = ({ value }: { value: string | undefined }) => {
 
 const DescriptionDetail = ({ video }: { video: DataVideoYoutube | null }) => {
   const moreRef = useRef<HTMLDivElement | null>(null);
+  const childMoreRef = useRef<HTMLDivElement | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleMoreClick = () => {
     if (moreRef.current) {
-      moreRef.current.style.height = isExpanded ? '112px' : 'auto';
+      moreRef.current.style.height = isExpanded ? '115px' : 'auto';
       setIsExpanded(!isExpanded);
     }
   };
@@ -22,8 +23,8 @@ const DescriptionDetail = ({ video }: { video: DataVideoYoutube | null }) => {
   if (!video) return <Skeleton className="w-full h-28 rounded-xl" />;
 
   return (
-    <div ref={moreRef} className="relative w-full h-28 rounded-xl overflow-hidden">
-      <div className="bg-[#f2f2f2] p-3  text-sm rounded-xl">
+    <div ref={moreRef} className="relative w-full h-[115px] rounded-xl overflow-hidden shadow-sm">
+      <div ref={childMoreRef} className="bg-[#f2f2f2] min-h-[115px] p-3 text-sm rounded-xl">
         <div className="font-medium space-x-2">
           <span>{formatViewCount(Number(video.statistics.viewCount))} views</span>
           <span>
@@ -54,10 +55,10 @@ const DescriptionDetail = ({ video }: { video: DataVideoYoutube | null }) => {
         )}
       </div>
 
-      {!isExpanded && video?.snippet?.description && (
+      {!isExpanded && video?.snippet?.description && childMoreRef.current?.offsetHeight! > 112 && (
         <div
           onClick={handleMoreClick}
-          className="text-end absolute bottom-0 right-0 bg-gradient-to-l from-[#f2f2f2] from-90% to-transparent text-sm font-medium pl-6 pr-4 cursor-pointer"
+          className="text-end absolute bottom-0 right-0 bg-gradient-to-l from-[#f2f2f2] from-90% to-transparent text-sm font-medium pl-6 pb-1 pr-4 cursor-pointer"
         >
           ...more
         </div>
