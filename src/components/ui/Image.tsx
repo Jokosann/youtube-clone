@@ -4,8 +4,8 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 type Iprops = {
   src: string;
   alt: string;
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
   className?: string;
 };
 

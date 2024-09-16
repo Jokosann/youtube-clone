@@ -4,7 +4,7 @@ import { DataVideoYoutube } from '@/types/video';
 import { formatViewCount } from '@/utils/formatViewCount';
 import { formatPublishTime } from '@/utils/formatPublishTime';
 import { useFetchApi } from '@/hooks/useFetchApi';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Channel } from '@/types/channel';
 import { formatDuration } from '@/utils/formatDuration';
 import useSidebarStore from '@/store/useSidebarStore';
@@ -13,6 +13,7 @@ import Profile from '/images/user_profile.jpg';
 
 const VideoCard = ({ video }: { video: DataVideoYoutube }) => {
   const { sidebarActive, setSidebarActive } = useSidebarStore();
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const { dataFirst: channel } = useFetchApi<Channel>('/channels', {
@@ -20,13 +21,29 @@ const VideoCard = ({ video }: { video: DataVideoYoutube }) => {
     id: video?.snippet?.channelId,
   });
 
+  const handleCLickDetailVideo = () => {
+    if (typeof setSidebarActive === 'function' && sidebarActive) setSidebarActive();
+
+    setSearchParams({ ...searchParams, v: video.id, cat: video.snippet.categoryId });
+    navigate(
+      `/detail?v=${encodeURIComponent(video.id)}&cat=${encodeURIComponent(video.snippet.categoryId)}`,
+      { replace: true }
+    );
+  };
+
+  const handleClickChannel = () => {
+    if (typeof setSidebarActive === 'function' && sidebarActive) setSidebarActive();
+
+    setSearchParams({ ...searchParams, u: channel?.snippet?.customUrl });
+    navigate(`/channel?u=${channel?.snippet?.customUrl}`, { replace: true });
+  };
+
+  // console.log(channel);
+
   return (
     <div className="w-full h-full cursor-pointer">
       <div
-        onClick={() => {
-          if (typeof setSidebarActive === 'function' && sidebarActive) setSidebarActive();
-          navigate(`/detail?v=${video?.id}&cat=${video?.snippet?.categoryId}`);
-        }}
+        onClick={handleCLickDetailVideo}
         className="relative w-full aspect-[2/1.15] rounded-xl overflow-hidden z-0"
       >
         <Image
@@ -42,10 +59,7 @@ const VideoCard = ({ video }: { video: DataVideoYoutube }) => {
       </div>
 
       <div className="flex gap-3 py-3">
-        <Link
-          to={`/channel?u=${channel?.snippet?.customUrl}`}
-          className="w-9 flex-shrink-0 overflow-hidden mt-1"
-        >
+        <div onClick={handleClickChannel} className="w-9 flex-shrink-0 overflow-hidden mt-1">
           <Image
             src={channel ? channel?.snippet?.thumbnails?.medium?.url : Profile}
             alt={channel ? channel?.snippet?.title : 'profile'}
@@ -53,7 +67,7 @@ const VideoCard = ({ video }: { video: DataVideoYoutube }) => {
             height="100%"
             className="rounded-full object-cover"
           />
-        </Link>
+        </div>
         <div className="max-w-full w-full">
           <p className="line-clamp-2 mb-0.5 text-base font-medium">{video?.snippet?.title}</p>
 

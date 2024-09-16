@@ -16,7 +16,7 @@ const HomePage = () => {
 
   return (
     <MainLayout>
-      <div className="w-full grid-card gap-x-5 gap-y-7">
+      <div className="w-full grid-card gap-x-5 gap-y-7 mt-[135px] ">
         {loading ? (
           <VideoCardSkeleton />
         ) : (

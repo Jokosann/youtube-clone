@@ -4,15 +4,25 @@ import { RelatedVideoType } from '@/types/related-video';
 import { formatPublishTime } from '@/utils/formatPublishTime';
 import { formatViewCount } from '@/utils/formatViewCount';
 import { EllipsisVertical } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 const RelatedVideo = ({ video }: { video: RelatedVideoType }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const handleCLickDetailVideo = (videoId: string, categoryId: string) => {
+    setSearchParams({ ...searchParams, v: videoId, cat: categoryId });
+
+    navigate(`${pathname}?v=${encodeURIComponent(videoId)}&cat=${encodeURIComponent(categoryId)}`, {
+      replace: true,
+    });
+  };
 
   return (
     <div className="flex w-full cursor-pointer">
       <div
-        onClick={() => navigate(`/detail?v=${video.id}&cat=${video.snippet.categoryId}`)}
+        onClick={() => handleCLickDetailVideo(video.id, video.snippet.categoryId)}
         className="w-[168px] h-[94px] overflow-hidden rounded-lg mr-2 flex-shrink-0"
       >
         <Image
