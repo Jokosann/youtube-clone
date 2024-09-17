@@ -12,12 +12,15 @@ import CategoryPills from '@/components/element/CategoryPills';
 import RelatedVideo from '@/components/element/RelatedVideo';
 import { fetchApiFromYoutubeData } from '@/utils/fetchApi';
 import Loading from '@/components/ui/Loading';
+import { navbarFilter } from '@/data/constants';
+import { Button } from '@/components/ui/Button';
 
 const MainDetailPage = ({ videoId, categoryId }: { videoId: string; categoryId: string }) => {
   const [video, setVideo] = useState<DataVideoYoutube | null>(null);
   const [comments, setComments] = useState<CommentVideo[] | null>(null);
   const [channel, setChannel] = useState<Channel | null>(null);
   const [relatedVideos, setRelatedVideos] = useState<RelatedVideoType[] | null>(null);
+  const [navFilter, setNavFilter] = useState('all');
 
   useEffect(() => {
     const fetchVideoDetail = async () => {
@@ -113,7 +116,19 @@ const MainDetailPage = ({ videoId, categoryId }: { videoId: string; categoryId: 
       <div className="w-full lg:w-[35%] space-y-2">
         {relatedVideos && (
           <div className="mb-6">
-            <CategoryPills />
+            <CategoryPills>
+              {navbarFilter.map((item: string, index: number) => (
+                <Button
+                  variant={navFilter === item ? 'default' : 'secondary'}
+                  size="sm"
+                  key={index}
+                  onClick={() => setNavFilter(item)}
+                  className="rounded-lg capitalize text-sm font-medium whitespace-nowrap snap-end"
+                >
+                  {item}
+                </Button>
+              ))}
+            </CategoryPills>
           </div>
         )}
 

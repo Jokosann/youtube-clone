@@ -1,13 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import Arrows from '@/components/ui/svg/Arrows';
-import { navbarFilter } from '@/data/constants';
 import { Button } from '@/components/ui/Button';
+import { cn } from '@/utils/cn';
 
-const CategoryPills = () => {
+const CategoryPills = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string | undefined;
+}) => {
   const navFilterRef = useRef<HTMLDivElement | null>(null);
 
   const [translate, setTranslate] = useState(0);
-  const [navFilter, setNavFilter] = useState('all');
   const [arrowFilterRight, setArrowFilterRight] = useState(false);
   const [arrowFilterLeft, setArrowFilterLeft] = useState(false);
 
@@ -49,24 +54,14 @@ const CategoryPills = () => {
   }
 
   return (
-    <div ref={navFilterRef} className="relative w-full overflow-hidden mt-3">
+    <div ref={navFilterRef} className="relative w-full overflow-hidden py-1">
       <div
-        className="flex whitespace-nowrap gap-3 transition-transform w-[max-content]"
+        className="flex whitespace-nowrap gap-3 items-center transition-transform w-[max-content]"
         style={{
           transform: `translateX(-${translate}px)`,
         }}
       >
-        {navbarFilter.map((item: string, index: number) => (
-          <Button
-            variant={navFilter === item ? 'default' : 'secondary'}
-            size="sm"
-            key={index}
-            onClick={() => setNavFilter(item)}
-            className="rounded-lg capitalize text-sm font-medium whitespace-nowrap snap-end"
-          >
-            {item}
-          </Button>
-        ))}
+        {children}
       </div>
 
       {arrowFilterLeft && (

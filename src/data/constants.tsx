@@ -413,3 +413,5 @@ export const videos = [
     videoUrl: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
   },
 ];
+
+export const categoryChannel = ['home', 'videos', 'shorts', 'live', 'playlists', 'post'];

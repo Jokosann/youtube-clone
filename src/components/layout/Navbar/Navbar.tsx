@@ -14,6 +14,7 @@ import { cn } from '@/utils/cn';
 import SearchSvg from '@/components/ui/svg/SearchSvg';
 import { Button } from '@/components/ui/Button';
 import CategoryPills from '@/components/element/CategoryPills';
+import { navbarFilter } from '@/data/constants';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const Navbar = () => {
   const inputSearchRef = useRef<HTMLInputElement | null>(null);
   const { setSidebarActive, sidebarActive } = useSidebarStore();
   const [searchActive, setSearchActive] = useState(false);
+  const [navFilter, setNavFilter] = useState('all');
 
   const isDekstop = useMediaQuery('(min-width: 768px)');
 
@@ -83,11 +85,23 @@ const Navbar = () => {
 
       {pathname === '/' && (
         <div
-          className={cn('px-2 md:ml-16', {
+          className={cn('md:ml-16', {
             'xl:ml-[240px]': sidebarActive,
           })}
         >
-          <CategoryPills />
+          <CategoryPills>
+            {navbarFilter.map((item: string, index: number) => (
+              <Button
+                variant={navFilter === item ? 'default' : 'secondary'}
+                size="sm"
+                key={index}
+                onClick={() => setNavFilter(item)}
+                className="rounded-lg capitalize text-sm font-medium whitespace-nowrap snap-end"
+              >
+                {item}
+              </Button>
+            ))}
+          </CategoryPills>
         </div>
       )}
     </header>
