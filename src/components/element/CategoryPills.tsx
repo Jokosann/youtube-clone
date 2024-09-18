@@ -1,17 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import Arrows from '@/components/ui/svg/Arrows';
 import { Button } from '@/components/ui/Button';
-import { cn } from '@/utils/cn';
 
-const CategoryPills = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string | undefined;
-}) => {
+const CategoryPills = ({ children }: { children: React.ReactNode }) => {
   const navFilterRef = useRef<HTMLDivElement | null>(null);
-
   const [translate, setTranslate] = useState(0);
   const [arrowFilterRight, setArrowFilterRight] = useState(false);
   const [arrowFilterLeft, setArrowFilterLeft] = useState(false);

@@ -15,7 +15,7 @@ import Loading from '@/components/ui/Loading';
 import { navbarFilter } from '@/data/constants';
 import { Button } from '@/components/ui/Button';
 
-const MainDetailPage = ({ videoId, categoryId }: { videoId: string; categoryId: string }) => {
+const MainDetail = ({ videoId, categoryId }: { videoId: string; categoryId: string }) => {
   const [video, setVideo] = useState<DataVideoYoutube | null>(null);
   const [comments, setComments] = useState<CommentVideo[] | null>(null);
   const [channel, setChannel] = useState<Channel | null>(null);
@@ -112,6 +112,7 @@ const MainDetailPage = ({ videoId, categoryId }: { videoId: string; categoryId: 
         {/* comment */}
         <CommentDetail comments={comments} />
       </div>
+
       {/* category */}
       <div className="w-full lg:w-[35%] space-y-2">
         {relatedVideos && (
@@ -140,9 +141,8 @@ const MainDetailPage = ({ videoId, categoryId }: { videoId: string; categoryId: 
           <p className="text-slate-500 italic mt-2">Nothing related videos</p>
         )}
       </div>
-      ;
     </>
   );
 };
 
-export default MainDetailPage;
+export default MainDetail;

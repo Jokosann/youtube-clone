@@ -5,6 +5,7 @@ export const useFetchApi = <T,>(path: string, params: any) => {
   const [data, setData] = useState<T[] | null>([]);
   const [dataFirst, setDataFirst] = useState<T | null>({} as T);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchDataApi = async () => {
@@ -13,8 +14,9 @@ export const useFetchApi = <T,>(path: string, params: any) => {
         const res = await fetchApiFromYoutubeData(path, params);
         setData(res.items);
         setDataFirst(res.items[0]);
-      } catch (error) {
+      } catch (error: any) {
         console.log('error hooks fetching data: ' + error);
+        setError(error);
       } finally {
         setLoading(false);
       }
@@ -23,5 +25,5 @@ export const useFetchApi = <T,>(path: string, params: any) => {
     fetchDataApi();
   }, [path]);
 
-  return { data, dataFirst, loading };
+  return { data, error, dataFirst, loading };
 };

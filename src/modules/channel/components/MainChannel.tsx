@@ -2,26 +2,27 @@ import { Button } from '@/components/ui/Button';
 import Image from '@/components/ui/Image';
 import { Channel } from '@/types/channel';
 import { fetchApiFromYoutubeData } from '@/utils/fetchApi';
-import { useEffect, useRef, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import Profile from '/images/user_profile.jpg';
 import { formatViewCount } from '@/utils/formatViewCount';
 import CategoryPills from '@/components/element/CategoryPills';
 import { categoryChannel } from '@/data/constants';
 import { cn } from '@/utils/cn';
-import SearchSvg from '@/components/ui/svg/SearchSvg';
+import ChannelVideo from './ChannelVideo';
+import { DataVideoYoutube } from '@/types/video';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
-const MainChannelPage = () => {
-  const [searchParams] = useSearchParams();
-  const username = searchParams.get('u') || '';
-
+const MainChannel = () => {
+  const { channel: username } = useParams();
   const [channel, setChannel] = useState<Channel | null>(null);
-  // const inputRef = useRef<HTMLInputElement | null>(null);
-  // const wrapperRef = useRef<HTMLDivElement | null>(null);
-  // const [inputFocus, setInputFocus] = useState(false);
-  // const [searchActive, setSearchActive] = useState(false);
+  const [videoChannel, setVideoChannel] = useState<DataVideoYoutube[] | null>(null);
   const [categoryActive, setCategoryActive] = useState('home');
+
+  const channelId = channel?.id;
+
+  const isDekstop = useMediaQuery('(min-width: 768px)');
 
   useEffect(() => {
     const fetchChannelDetail = async () => {
@@ -40,33 +41,27 @@ const MainChannelPage = () => {
     fetchChannelDetail();
   }, [username]);
 
-  // Handle click outside search
-  // useEffect(() => {
-  //   if (inputRef.current && searchActive) {
-  //     inputRef.current.focus();
-  //   }
+  useEffect(() => {
+    const fetchVideoChannel = async () => {
+      if (!channelId) return;
 
-  //   const handleClickOutside = (e: MouseEvent) => {
-  //     if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
-  //       setSearchActive(false);
-  //       setInputFocus(false);
-  //     } else {
-  //       if (inputRef.current && searchActive) {
-  //         inputRef.current.focus();
-  //         setInputFocus(true);
-  //       }
-  //       setSearchActive(true);
-  //     }
-  //   };
+      try {
+        const response = await fetchApiFromYoutubeData('/search', {
+          part: 'snippet',
+          channelId: channelId,
+          maxResults: 10,
+        });
 
-  //   window.addEventListener('click', handleClickOutside);
+        setVideoChannel(response?.items);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  //   return () => {
-  //     window.removeEventListener('click', handleClickOutside);
-  //   };
-  // }, [searchActive]);
+    fetchVideoChannel();
+  }, [channelId]);
 
-  // console.log(searchActive);
+  // console.log({ videoChannel, channel, channelId });
 
   return (
     <div className="mt-20 mb-[1000px]">
@@ -93,7 +88,7 @@ const MainChannelPage = () => {
           </div>
           {/* info */}
           <div>
-            <p className="text-2xl sm:text-4xl font-bold line-clamp-2 mb-1 sm:mb-1.5">
+            <p className="text-2xl sm:text-4xl font-bold,contentDetails,statistics line-clamp-2 mb-1 sm:mb-1.5">
               {channel?.snippet?.title}
             </p>
 
@@ -112,8 +107,19 @@ const MainChannelPage = () => {
               </div>
             </div>
 
-            <p className="text-xs mb-2 line-clamp-1">{channel?.snippet?.description}</p>
-            <p className="text-xs text-blue-500 mb-4 md:mb-3">https://saweria.co/username</p>
+            <p className="relative text-xs mb-2 line-clamp-1 max-w-64">
+              {channel?.snippet?.description}
+              <span className="absolute top-0 right-0 w-20 text-right cursor-pointer test-xs font-medium bg-gradient-to-l from-white from-50% to-transparent">
+                ...more
+              </span>
+            </p>
+
+            <p className="relative max-w-64 text-xs text-blue-500 mb-4 md:mb-3">
+              https://saweria.co/username
+              <span className="absolute top-0 right-0 w-20 text-black text-right cursor-pointer test-xs font-medium bg-gradient-to-l from-white from-50% to-transparent whitespace-nowrap">
+                and 2 more links
+              </span>
+            </p>
 
             <Button className="w-full md:w-fit rounded-full">
               {/* <SubscribeBell/> */}
@@ -140,37 +146,18 @@ const MainChannelPage = () => {
                 </span>
               </div>
             ))}
-
-            {/* bug */}
-            {/* <div className="flex items-center" ref={wrapperRef}>
-              <Button ref={searchRef} variant="ghost" size="icon">
-                <SearchSvg className="text-gray-600" />
-              </Button>
-              {searchActive && (
-                <div className="relative">
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    name="comment"
-                    placeholder="Search"
-                    className="outline-none w-full pb-1.5 text-sm placeholder:text-gray-600 placeholder:text-sm"
-                    onFocus={() => setInputFocus(true)}
-                    onBlur={() => setInputFocus(false)}
-                  />
-                  <div
-                    className={cn(
-                      'absolute -bottom-[1px] left-0 right-0 h-0.5 bg-black scale-0 transition-scale transition-transform',
-                      { 'scale-100': inputFocus }
-                    )}
-                  />
-                </div>
-              )}
-            </div> */}
           </CategoryPills>
+        </div>
+
+        {/* video channel */}
+        <div className={cn('mt-6 space-y-2', { 'grid-video-channel gap-4 space-y-0': isDekstop })}>
+          {videoChannel?.map((video: DataVideoYoutube, i: number) => (
+            <ChannelVideo key={i} video={video} />
+          ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default MainChannelPage;
+export default MainChannel;

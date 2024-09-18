@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import DetailLayout from '@/layouts/DetailLayout';
 import Loading from '@/components/ui/Loading';
 
-const MainDetailPage = lazy(() => import('./components/MainDetailPage'));
+const MainDetailPage = lazy(() => import('./components/MainDetail'));
 
 const DetailPage = () => {
   const [searchParams] = useSearchParams();

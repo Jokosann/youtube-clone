@@ -26,7 +26,7 @@ const VideoCard = ({ video }: { video: DataVideoYoutube }) => {
 
     setSearchParams({ ...searchParams, v: video.id, cat: video.snippet.categoryId });
     navigate(
-      `/detail?v=${encodeURIComponent(video.id)}&cat=${encodeURIComponent(video.snippet.categoryId)}`,
+      `/watch?v=${encodeURIComponent(video.id)}&cat=${encodeURIComponent(video.snippet.categoryId)}`,
       { replace: true }
     );
   };
@@ -35,7 +35,7 @@ const VideoCard = ({ video }: { video: DataVideoYoutube }) => {
     if (typeof setSidebarActive === 'function' && sidebarActive) setSidebarActive();
 
     setSearchParams({ ...searchParams, u: channel?.snippet?.customUrl });
-    navigate(`/channel?u=${channel?.snippet?.customUrl}`, { replace: true });
+    navigate(`/${channel?.snippet?.customUrl}`, { replace: true });
   };
 
   // console.log(channel);
@@ -71,9 +71,9 @@ const VideoCard = ({ video }: { video: DataVideoYoutube }) => {
         <div className="max-w-full w-full">
           <p className="line-clamp-2 mb-0.5 text-base font-medium">{video?.snippet?.title}</p>
 
-          <Link to={`/channel?u=${channel?.snippet?.customUrl}`} className="text-sm text-gray-600">
+          <div onClick={handleClickChannel} className="text-sm text-gray-600">
             {video?.snippet?.channelTitle}
-          </Link>
+          </div>
 
           <div className="text-sm flex items-center gap-[6px] text-gray-600">
             <p>{formatViewCount(Number(video?.statistics?.viewCount))} views</p>

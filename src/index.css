@@ -137,6 +137,11 @@ pre {
   grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
 }
 
+.grid-video-channel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+
 .category-channel::after {
   content: '';
   position: absolute;
