@@ -57,7 +57,7 @@ const CategoryPills = ({ children }: { children: React.ReactNode }) => {
       </div>
 
       {arrowFilterLeft && (
-        <div className="absolute top-0 left-0 flex justify-start bg-gradient-to-r from-white from-50% to-transparent items-center w-28 h-full z-30">
+        <div className="absolute top-0 left-0 flex justify-start bg-gradient-to-r from-white from-50% to-transparent items-center w-28 h-full z-10">
           <Button variant="ghost" size="icon" onClick={handleClickArrowLeft}>
             <Arrows className="scale-125 rotate-180" />
           </Button>
@@ -65,7 +65,7 @@ const CategoryPills = ({ children }: { children: React.ReactNode }) => {
       )}
 
       {arrowFilterRight && (
-        <div className="absolute top-0 right-0 flex justify-end bg-gradient-to-l from-white from-50% to-transparent items-center w-28 h-full z-30">
+        <div className="absolute top-0 right-0 flex justify-end bg-gradient-to-l from-white from-50% to-transparent items-center w-28 h-full z-10">
           <Button variant="ghost" size="icon" onClick={handleClickArrowRight}>
             <Arrows className="scale-125" />
           </Button>

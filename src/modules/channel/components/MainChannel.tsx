@@ -3,7 +3,6 @@ import Image from '@/components/ui/Image';
 import { Channel } from '@/types/channel';
 import { fetchApiFromYoutubeData } from '@/utils/fetchApi';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
 import Profile from '/images/user_profile.jpg';
 import { formatViewCount } from '@/utils/formatViewCount';
@@ -14,11 +13,13 @@ import ChannelVideo from './ChannelVideo';
 import { DataVideoYoutube } from '@/types/video';
 import useMediaQuery from '@/hooks/useMediaQuery';
 
-const MainChannel = () => {
-  const { channel: username } = useParams();
+const filterVideoChannel = ['latest', 'popular', 'oldest'];
+
+const MainChannel = ({ username }: { username: string | undefined }) => {
   const [channel, setChannel] = useState<Channel | null>(null);
   const [videoChannel, setVideoChannel] = useState<DataVideoYoutube[] | null>(null);
-  const [categoryActive, setCategoryActive] = useState('home');
+  const [categoryActive, setCategoryActive] = useState('videos');
+  const [filterActive, setFilterActive] = useState('latest');
 
   const channelId = channel?.id;
 
@@ -50,6 +51,8 @@ const MainChannel = () => {
           part: 'snippet',
           channelId: channelId,
           maxResults: 10,
+          chart: 'mostPopular',
+          type: 'video',
         });
 
         setVideoChannel(response?.items);
@@ -64,10 +67,10 @@ const MainChannel = () => {
   // console.log({ videoChannel, channel, channelId });
 
   return (
-    <div className="mt-20 mb-[1000px]">
+    <div className="mt-16 md:px-14">
       <div className="container xl:max-w-screen-xl w-full mx-auto">
         {/* sampul */}
-        <div className="w-full aspect-[6/1.4] md:h-[172px] rounded-xl overflow-hidden mb-4">
+        <div className="w-full aspect-[6/1.4] md:h-[172px] rounded-xl overflow-hidden mb-5">
           <Image
             src={channel ? channel?.snippet?.thumbnails?.medium?.url : Profile}
             alt="Sampul channel"
@@ -88,7 +91,7 @@ const MainChannel = () => {
           </div>
           {/* info */}
           <div>
-            <p className="text-2xl sm:text-4xl font-bold,contentDetails,statistics line-clamp-2 mb-1 sm:mb-1.5">
+            <p className="text-2xl sm:text-4xl font-bold line-clamp-2 mb-1 sm:mb-1.5">
               {channel?.snippet?.title}
             </p>
 
@@ -107,16 +110,16 @@ const MainChannel = () => {
               </div>
             </div>
 
-            <p className="relative text-xs mb-2 line-clamp-1 max-w-64">
+            <p className="relative text-xs mb-2 line-clamp-1 w-fit max-w-64">
               {channel?.snippet?.description}
               <span className="absolute top-0 right-0 w-20 text-right cursor-pointer test-xs font-medium bg-gradient-to-l from-white from-50% to-transparent">
                 ...more
               </span>
             </p>
 
-            <p className="relative max-w-64 text-xs text-blue-500 mb-4 md:mb-3">
+            <p className="relative text-xs line-clamp-1 text-blue-500 mb-4 md:mb-3 max-w-64">
               https://saweria.co/username
-              <span className="absolute top-0 right-0 w-20 text-black text-right cursor-pointer test-xs font-medium bg-gradient-to-l from-white from-50% to-transparent whitespace-nowrap">
+              <span className="absolute top-0 right-0 w-24 text-black text-left cursor-pointer test-xs font-medium bg-gradient-to-l from-white from-80% to-transparent whitespace-nowrap">
                 and 2 more links
               </span>
             </p>
@@ -149,8 +152,23 @@ const MainChannel = () => {
           </CategoryPills>
         </div>
 
+        {/* filter */}
+        <div className="flex gap-4 my-4">
+          {filterVideoChannel.map((item: string) => (
+            <Button
+              onClick={() => setFilterActive(item)}
+              size="sm"
+              variant={filterActive === item ? 'default' : 'secondary'}
+              key={item}
+              className="capitalize"
+            >
+              {item}
+            </Button>
+          ))}
+        </div>
+
         {/* video channel */}
-        <div className={cn('mt-6 space-y-2', { 'grid-video-channel gap-4 space-y-0': isDekstop })}>
+        <div className={cn('space-y-2', { 'grid-video-channel gap-4 space-y-0': isDekstop })}>
           {videoChannel?.map((video: DataVideoYoutube, i: number) => (
             <ChannelVideo key={i} video={video} />
           ))}

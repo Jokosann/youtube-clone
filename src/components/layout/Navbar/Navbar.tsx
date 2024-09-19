@@ -37,7 +37,7 @@ const Navbar = () => {
 
   return (
     <header className="fixed w-full top-0 left-0 right-0 px-4 sm:px-6 py-2 bg-white z-20">
-      <nav className="flex justify-between gap-10 md:gap-20 mb-5">
+      <nav className="flex justify-between gap-10 md:gap-20">
         <div
           className={cn('flex flex-shrink-0 items-center gap-4 -ml-2', {
             hidden: searchActive,
@@ -85,7 +85,7 @@ const Navbar = () => {
 
       {pathname === '/' && (
         <div
-          className={cn('md:ml-16', {
+          className={cn('md:ml-16 mt-5', {
             'xl:ml-[240px]': sidebarActive,
           })}
         >

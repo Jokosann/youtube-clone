@@ -4,7 +4,7 @@ import { DataVideoYoutube } from '@/types/video';
 import { formatViewCount } from '@/utils/formatViewCount';
 import { formatPublishTime } from '@/utils/formatPublishTime';
 import { useFetchApi } from '@/hooks/useFetchApi';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Channel } from '@/types/channel';
 import { formatDuration } from '@/utils/formatDuration';
 import useSidebarStore from '@/store/useSidebarStore';

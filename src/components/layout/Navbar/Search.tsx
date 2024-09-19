@@ -1,10 +1,11 @@
 import { cn } from '@/utils/cn';
-import { forwardRef } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa6';
 
 import { IoMdMic } from 'react-icons/io';
 import SearchSvg from '@/components/ui/svg/SearchSvg';
 import { Button } from '@/components/ui/Button';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 type IProps = {
   state: {
@@ -15,6 +16,25 @@ type IProps = {
 
 const Search = forwardRef<HTMLInputElement, IProps>(({ state }, ref) => {
   const { searchActive, setSearchActive } = state;
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearchQuery = () => {
+    if (searchQuery.trim() === '') {
+      return alert('Masuukan kalimat yang benar.');
+    }
+    setSearchParams({ q: searchQuery });
+
+    navigate(`/result?q=${encodeURIComponent(searchQuery)}`, { replace: true });
+  };
+
+  useEffect(() => {
+    const query = searchParams.get('q');
+    if (query) {
+      setSearchQuery(query);
+    }
+  }, [searchParams]);
 
   return (
     <div
@@ -32,6 +52,11 @@ const Search = forwardRef<HTMLInputElement, IProps>(({ state }, ref) => {
       <div className="flex flex-grow border border-slate-500/50 rounded-full overflow-hidden">
         <input
           ref={ref}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyUp={(e) => {
+            if (e.key === 'Enter') handleSearchQuery();
+          }}
+          value={searchQuery}
           type="search"
           name="search"
           placeholder="Search"
