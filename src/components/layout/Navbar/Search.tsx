@@ -62,7 +62,7 @@ const Search = forwardRef<HTMLInputElement, IProps>(({ state }, ref) => {
           placeholder="Search"
           className="w-full h-full border-r rounded-l-full border-slate-500/50 outline-none focus:border focus:border-blue-500/80 px-4"
         />
-        <div className="center bg-secondary px-5 cursor-pointer">
+        <div onClick={() => handleSearchQuery()} className="center bg-secondary px-5 cursor-pointer">
           <SearchSvg />
         </div>
       </div>

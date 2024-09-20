@@ -7,12 +7,12 @@ import { useFetchApi } from '@/hooks/useFetchApi';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Channel } from '@/types/channel';
 import { formatDuration } from '@/utils/formatDuration';
-import useSidebarStore from '@/store/useSidebarStore';
 import Image from '@/components/ui/Image';
 import Profile from '/images/user_profile.jpg';
+import useSidebar from '@/store/useSidebarStore';
 
 const VideoCard = ({ video }: { video: DataVideoYoutube }) => {
-  const { sidebarActive, setSidebarActive } = useSidebarStore();
+  const { sidebarActive, setSidebarActive } = useSidebar();
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -37,8 +37,6 @@ const VideoCard = ({ video }: { video: DataVideoYoutube }) => {
     setSearchParams({ ...searchParams, u: channel?.snippet?.customUrl });
     navigate(`/${channel?.snippet?.customUrl}`, { replace: true });
   };
-
-  // console.log(channel);
 
   return (
     <div className="w-full h-full cursor-pointer">

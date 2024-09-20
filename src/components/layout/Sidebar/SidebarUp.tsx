@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import useSidebarStore from '@/store/useSidebarStore.ts';
 import { cn } from '@/utils/cn.ts';
 import HambergerMenu from '@/components/ui/svg/HambergerMenu';
 import YoutubeLogo from '@/components/ui/svg/YoutubeLogo';
@@ -9,12 +8,13 @@ import { listSidebarUp } from '@/data/constants';
 import Arrows from '@/components/ui/svg/Arrows';
 import { useLocation } from 'react-router-dom';
 import { ISidebarMenuGroub } from '@/types/navbar-sidebar';
+import useSidebar from '@/store/useSidebarStore.ts';
 
 const sidebarPath = ['/detail'];
 
 const SidebarUp = () => {
   const [sidebarUpActive, setSidebarUpActive] = useState('Home');
-  const { sidebarActive, setSidebarActive } = useSidebarStore();
+  const { sidebarActive, setSidebarActive } = useSidebar();
   const { pathname } = useLocation();
   const isSidebarPath = sidebarPath.includes(pathname);
 

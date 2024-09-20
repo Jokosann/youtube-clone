@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { useShallow } from 'zustand/react/shallow';
 
 type Store = {
   sidebarActive: boolean;
@@ -10,4 +11,15 @@ const useSidebarStore = create<Store>((set) => ({
   setSidebarActive: () => set((state) => ({ sidebarActive: !state.sidebarActive })),
 }));
 
-export default useSidebarStore;
+const useSidebar = () => {
+  const state = useSidebarStore(
+    useShallow((prev) => ({
+      sidebarActive: prev.sidebarActive,
+      setSidebarActive: prev.setSidebarActive,
+    }))
+  );
+
+  return state;
+};
+
+export default useSidebar;

@@ -2,12 +2,8 @@ import { Button } from '@/components/ui/Button';
 import Image from '@/components/ui/Image';
 import { DataVideoYoutube } from '@/types/video';
 import { EllipsisVertical } from 'lucide-react';
-// import { formatPublishTime } from '@/utils/formatPublishTime';
-// import { formatViewCount } from '@/utils/formatViewCount';
 
 const ChannelVideo = ({ video }: { video: DataVideoYoutube }) => {
-  console.log(video);
-
   return (
     <div className="flex md:flex-col w-full cursor-pointer">
       <div className="w-[168px] aspect-video md:w-full overflow-hidden rounded-xl mr-2 flex-shrink-0 md:mb-2">

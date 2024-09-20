@@ -41,8 +41,6 @@ const MainSearch = ({ searchQuery }: { searchQuery: string }) => {
     fetchSearchVideo();
   }, [searchQuery]);
 
-  console.log(searchResult);
-
   return (
     <div className="mt-16">
       <CategoryPills>

@@ -4,17 +4,16 @@ import { RelatedVideoType } from '@/types/related-video';
 import { formatPublishTime } from '@/utils/formatPublishTime';
 import { formatViewCount } from '@/utils/formatViewCount';
 import { EllipsisVertical } from 'lucide-react';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const RelatedVideo = ({ video }: { video: RelatedVideoType }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { pathname } = useLocation();
 
   const handleCLickDetailVideo = (videoId: string, categoryId: string) => {
     setSearchParams({ ...searchParams, v: videoId, cat: categoryId });
 
-    navigate(`${pathname}?v=${encodeURIComponent(videoId)}&cat=${encodeURIComponent(categoryId)}`, {
+    navigate(`/watch?v=${encodeURIComponent(videoId)}&cat=${encodeURIComponent(categoryId)}`, {
       replace: true,
     });
   };

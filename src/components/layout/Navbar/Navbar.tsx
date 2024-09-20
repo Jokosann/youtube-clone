@@ -1,6 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import useSidebarStore from '@/store/useSidebarStore';
-
 import HambergerMenu from '@/components/ui/svg/HambergerMenu';
 import YoutubeLogo from '@/components/ui/svg/YoutubeLogo';
 import Upload from '@/components/ui/svg/Upload';
@@ -13,15 +11,16 @@ import { IoMdMic } from 'react-icons/io';
 import { cn } from '@/utils/cn';
 import SearchSvg from '@/components/ui/svg/SearchSvg';
 import { Button } from '@/components/ui/Button';
-import CategoryPills from '@/components/element/CategoryPills';
 import { navbarFilter } from '@/data/constants';
+import useSidebar from '@/store/useSidebarStore';
+import CategoryPills from '@/components/element/CategoryPills';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
   const inputSearchRef = useRef<HTMLInputElement | null>(null);
-  const { setSidebarActive, sidebarActive } = useSidebarStore();
+  const { setSidebarActive, sidebarActive } = useSidebar();
   const [searchActive, setSearchActive] = useState(false);
   const [navFilter, setNavFilter] = useState('all');
 

@@ -4,10 +4,10 @@ import SidebarUp from '../components/layout/Sidebar/SidebarUp';
 import SidebarDown from '../components/layout/Sidebar/SidebarDown';
 import { cn } from '@/utils/cn';
 import useMediaQuery from '@/hooks/useMediaQuery';
-import useSidebarStore from '@/store/useSidebarStore';
+import useSidebar from '@/store/useSidebarStore';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
-  const { sidebarActive, setSidebarActive } = useSidebarStore();
+  const { sidebarActive, setSidebarActive } = useSidebar();
   const isDesktopLarge = useMediaQuery('(min-width: 1280px)');
 
   useEffect(() => {

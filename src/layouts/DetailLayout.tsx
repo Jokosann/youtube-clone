@@ -1,10 +1,10 @@
 import Navbar from '@/components/layout/Navbar/Navbar';
 import SidebarUp from '@/components/layout/Sidebar/SidebarUp';
-import useSidebarStore from '@/store/useSidebarStore';
+import useSidebar from '@/store/useSidebarStore';
 import { cn } from '@/utils/cn';
 
 const DetailLayout = ({ children }: { children: React.ReactNode }) => {
-  const { sidebarActive, setSidebarActive } = useSidebarStore();
+  const { sidebarActive, setSidebarActive } = useSidebar();
 
   const handleSidebarToggle = () => {
     if (typeof setSidebarActive === 'function') setSidebarActive();
