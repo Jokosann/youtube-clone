@@ -62,7 +62,7 @@ export const useFetchVideoData = (videoId: string, categoryId: string) => {
     }
   }, [video, fetchChannelData]);
 
-  console.log(relatedVideos);
+  // console.log(relatedVideos);
 
   return { video, comments, channel, relatedVideos, loading, error };
 };
